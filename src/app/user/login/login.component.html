@@ -1,0 +1,13 @@
+<div class="sign-wrapper">
+    <p>login works!</p>
+    <form [formGroup]="profileForm" (ngSubmit)="onSignIn()">
+        <div class="sign-form-wrapper">
+            <input type="text" class="input" placeholder="Username" formControlName="Username">
+            <input type="text" class="input" placeholder="Password" formControlName="Password">
+        </div>
+        <div class="sign-button-wrapper">
+            <button class="btn btn-primary" type="submit">Sign-In</button>
+            <button class="btn btn-primary" routerLink="/register">Sign-Up</button>
+        </div>
+    </form>
+</div>

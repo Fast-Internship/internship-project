@@ -1,0 +1,24 @@
+<div class="sign-wrapper">
+    <p>Create A New Account!</p>
+    <div class="sign-form-wrapper">
+        <form autocomplete="off" [formGroup]="profileForm" (ngSubmit)="formValidate()">
+            <label for="Username">Username</label><br>
+                <input type="text" class="input" id="Username" placeholder="Username" formControlName="Username"><br>
+                <span *ngIf="!profileForm.controls.Username.valid && profileForm.controls.Username.touched" style="color:rgb(238, 83, 83)">Username must be minimum 4 characters long!</span><br>
+            <label for="Email">Email</label><br>
+                <input type="text" class="input" id="Email" placeholder="Email" formControlName="Email"><br>
+                <span *ngIf="!profileForm.controls.Email.valid && profileForm.controls.Email.touched" style="color:rgb(238, 83, 83)">Invalid email format!</span><br>
+            <label for="Password">Password</label><br>
+                <input type="text" class="input" id="Password" placeholder="Password" formControlName="Password"><br>
+                <span *ngIf="!profileForm.controls.Password.valid && profileForm.controls.Password.touched" style="color:rgb(238, 83, 83)">Password must be minimum 6 characters long</span><br>
+            <div class="sign-button-wrapper">
+                <button class="btn btn-primary" type="submit">Sign-Up</button>
+                <button class="btn btn-primary" routerLink="/login">Sign-In</button>
+            </div>            
+        </form>
+
+    </div>
+</div>
+<div class="sign-validation" #signValidation>
+
+</div>
