@@ -3,7 +3,6 @@ import { ElementRef } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { User } from 'src/app/core/models/user.model';
 import { AuthService } from 'src/app/core/services/auth.service';
 
 @Component({
@@ -27,14 +26,14 @@ export class RegisterComponent implements OnInit {
   }
 
   onRegister() {
-    if (this.profileForm.valid) {
+    if (this.profileForm.valid) {      
       this.AuthService.createAndStoreUser(
         this.profileForm.value.Username,
         this.profileForm.value.Email,
         this.profileForm.value.Password
       )
       alert("New Account Created!")
-      // this.router.navigate(['login'])
+      this.router.navigate(['login'])
     }
   }
 }

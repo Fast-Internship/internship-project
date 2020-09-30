@@ -9,9 +9,6 @@ import { AuthService } from 'src/app/core/services/auth.service'
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
-  // userData: any[] = JSON.parse(localStorage.getItem("users"));
-  usersArray: any[];
-
   profileForm = this.fb.group({
     Username: ['', Validators.required],
     Password: ['', Validators.required]
