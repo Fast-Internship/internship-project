@@ -5,7 +5,9 @@ import { map } from 'rxjs/operators';
 import { User } from '../models/user.model';
 
 
-@Injectable()
+@Injectable({
+  providedIn:"root"
+})
 
 export class AuthService {
 

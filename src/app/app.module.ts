@@ -5,15 +5,13 @@ import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { SharedModule } from './shared/shared.module';
 import { AuthModule } from './auth/auth.module';
-import { AuthService } from './core/services/auth.service';
-import { CarListComponent } from './components/car-list/car-list.component';
 import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
-import { AuthRoutingModule } from './auth/auth-routing.module';
 import { CommonModule } from '@angular/common';
+import { ListModule } from './components/list.module';
 
 @NgModule({
-  declarations: [AppComponent, CarListComponent],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     CommonModule,
@@ -21,12 +19,10 @@ import { CommonModule } from '@angular/common';
     SharedModule,
     AuthModule,
     RouterModule,  
-    AuthRoutingModule, 
-    AppRoutingModule    
+    AppRoutingModule,
+    ListModule    
   ],
-  providers: [
-    AuthService,
-  ],
+  providers: [],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

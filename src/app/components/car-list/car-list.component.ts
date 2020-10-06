@@ -12,13 +12,12 @@ export class CarListComponent implements OnInit {
   carList: Car[];
   carListObj_Keys:Array<string>;
   slicedCars: Car[];
+  
   constructor(private carService: CarService) { 
 
   }
 
   ngOnInit(): void {
-    // this.sliceCars();
-    // this.createPagination();
     this.carService.fetchCars()
     .subscribe(cars=>{
       this.carList = cars;
@@ -26,7 +25,6 @@ export class CarListComponent implements OnInit {
       this.slicedCars = this.carService.sliceCars(this.carList)
       console.log(this.slicedCars)
     }); 
-
   }
 
 }
