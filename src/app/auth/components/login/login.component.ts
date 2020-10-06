@@ -14,12 +14,12 @@ export class LoginComponent implements OnInit {
     Password: ['', Validators.required]
   })
   constructor(private fb: FormBuilder,
-    private AuthService: AuthService) { }
+    private authService: AuthService) { }
 
   ngOnInit(): void {
   }
   onLogIn() {
-    this.AuthService.fetchUsers(
+    this.authService.fetchUsers(
       this.profileForm.value.Username, 
       this.profileForm.value.Password
     )

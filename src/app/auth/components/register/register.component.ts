@@ -19,7 +19,7 @@ export class RegisterComponent implements OnInit {
     Password: ['', [Validators.minLength(6), Validators.required]],
   })
 
-  constructor(private fb: FormBuilder, private router: Router, private AuthService: AuthService) { }
+  constructor(private fb: FormBuilder, private router: Router, private authService: AuthService) { }
 
   ngOnInit(): void {
 
@@ -27,7 +27,7 @@ export class RegisterComponent implements OnInit {
 
   onRegister() {
     if (this.profileForm.valid) {      
-      this.AuthService.createAndStoreUser(
+      this.authService.createAndStoreUser(
         this.profileForm.value.Username,
         this.profileForm.value.Email,
         this.profileForm.value.Password

@@ -1,12 +1,26 @@
-<div class="sign-wrapper">
-    <p>Login here!</p>
+<div class="container">
+    <h2>Login Here</h2>
     <form [formGroup]="profileForm" (ngSubmit)="onLogIn()">
-        <div class="sign-form-wrapper">
-            <input type="text" class="input" placeholder="Username" formControlName="Username">
-            <input type="text" class="input" placeholder="Password" formControlName="Password">
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="inputLogin">Login</label>
+                <input type="text" 
+                       class="form-control" 
+                       placeholder="Username" 
+                       formControlName="Username" 
+                       id="inputLogin">
+            </div>
+            <div class="form-group col-md-6">
+                <label for="inputPassword">Password</label>
+                <input type="text"
+                       class="form-control"
+                       placeholder="Password" 
+                       formControlName="Password" 
+                       id="inputPassword">
+            </div>
         </div>
         <div class="sign-button-wrapper">
-            <button class="btn btn-primary" type="submit">Log-In</button>
+            <button class="btn btn-primary" type="submit">Login</button>
             <button class="btn btn-primary" routerLink="/register">Register</button>
         </div>
     </form>

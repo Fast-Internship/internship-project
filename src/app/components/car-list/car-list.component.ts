@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Car } from 'src/app/core/models/car.model';
+import { CarService } from 'src/app/core/services/car-service'
 
 @Component({
   selector: 'app-car-list',
@@ -7,9 +9,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CarListComponent implements OnInit {
 
-  constructor() { }
+  carList: Car[];
+  carListObj_Keys:Array<string>;
+  slicedCars: Car[];
+  constructor(private carService: CarService) { 
+
+  }
 
   ngOnInit(): void {
+    // this.sliceCars();
+    // this.createPagination();
+    this.carService.fetchCars()
+    .subscribe(cars=>{
+      this.carList = cars;
+      this.carListObj_Keys = Object.keys(this.carList[0]);
+      this.slicedCars = this.carService.sliceCars(this.carList)
+      console.log(this.slicedCars)
+    }); 
+
   }
 
 }

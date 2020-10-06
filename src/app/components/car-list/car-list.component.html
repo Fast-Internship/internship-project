@@ -1,1 +1,35 @@
-<p>car-list works!</p>
+<div class="container">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th *ngFor="let key of carListObj_Keys" scope="col">{{ key }}</th>
+            </tr>
+        </thead>
+        <ng-container *ngIf="slicedCars.length">
+            <tbody>
+                <tr *ngFor="let car of slicedCars">
+                    <td>{{car.Model}}</td>
+                    <td>{{car.Brand}}</td>
+                    <td>{{car.Date}}</td>
+                    <td>{{car.Horsepower}}</td>
+                    <td>{{car.Transmission}}</td>
+                    <td>{{car.Class}}</td>
+                </tr>
+            </tbody>
+        </ng-container>
+    </table>
+    <nav aria-label="Page navigation example">
+        <ul class="pagination">
+            <li class="page-item">
+                <a class="page-link">Previous</a>
+            </li>
+            <!-- <li *ngFor="let button of pagination_buttons" class="page-item" [ngClass]="{'active': current_page === button-1}">
+                <a class="page-link active"                     
+                   (click)="changePage($event)">{{ button }}</a>
+            </li> -->
+            <li class="page-item">
+                <a class="page-link">Next</a>
+            </li>
+        </ul>
+    </nav>
+</div>
