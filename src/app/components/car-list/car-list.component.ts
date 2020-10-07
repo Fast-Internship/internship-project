@@ -1,4 +1,4 @@
-import { Component, DoCheck, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, DoCheck, OnInit } from '@angular/core';
 import { Car } from 'src/app/core/models/car.model';
 import { CarService } from 'src/app/core/services/car-service'
 
@@ -9,7 +9,7 @@ import { CarService } from 'src/app/core/services/car-service'
 })
 export class CarListComponent implements OnInit, DoCheck {
   carsArray: Car[];
-  carListObj_Keys:Array<string>;
+  carTitles: Array<string>=["Brand","Class","Date","Horsepower","Model","Transmission"];
   slicedCars: Car[];
   pages: number;
 
@@ -21,7 +21,7 @@ export class CarListComponent implements OnInit, DoCheck {
     this.carService.fetchCars()
       .subscribe(carsArray => {
         this.carsArray = carsArray;
-        this.carListObj_Keys = Object.keys(carsArray[0]);
+        localStorage.setItem('carsArray', JSON.stringify(this.carsArray))
         this.pages = Math.ceil(carsArray.length / this.carService.rows);
       });         
   }

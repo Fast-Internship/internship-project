@@ -8,7 +8,7 @@ import { AuthModule } from './auth/auth.module';
 import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
 import { CommonModule } from '@angular/common';
-import { ListModule } from './components/list.module';
+import { ComponentsModule } from './components/components.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -20,7 +20,7 @@ import { ListModule } from './components/list.module';
     AuthModule,
     RouterModule,  
     AppRoutingModule,
-    ListModule    
+    ComponentsModule    
   ],
   providers: [],
   bootstrap: [AppComponent],

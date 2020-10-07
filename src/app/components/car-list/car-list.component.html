@@ -2,18 +2,18 @@
     <table class="table table-striped">
         <thead>
             <tr>
-                <th *ngFor="let key of carListObj_Keys" scope="col">{{ key }}</th>
+                <th *ngFor="let title of carTitles" scope="col">{{ title }}</th>
             </tr>
         </thead>
         <ng-container *ngIf="slicedCars?.length">
             <tbody>
                 <tr *ngFor="let car of slicedCars">
-                    <td>{{car.Model}}</td>
                     <td>{{car.Brand}}</td>
+                    <td>{{car.Class}}</td>
                     <td>{{car.Date}}</td>
                     <td>{{car.Horsepower}}</td>
+                    <td>{{car.Model}}</td>
                     <td>{{car.Transmission}}</td>
-                    <td>{{car.Class}}</td>
                 </tr>
             </tbody>
         </ng-container>

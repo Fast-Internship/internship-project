@@ -20,4 +20,4 @@ import { PaginationComponent } from './pagination/pagination.component';
     PaginationComponent
   ]
 })
-export class ListModule { }
+export class ComponentsModule { }

@@ -1,5 +1,4 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { CarService } from 'src/app/core/services/car-service';
 import { PaginationService } from 'src/app/core/services/pagination.service';
 
 

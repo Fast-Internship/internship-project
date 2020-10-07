@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core'
+import { Router } from '@angular/router'
 import { BehaviorSubject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { User } from '../models/user.model';
@@ -13,7 +14,7 @@ export class AuthService {
 
   userLoggedIn = new BehaviorSubject<boolean>(false);
   usersArray: any[];
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private router: Router) { }
 
   createAndStoreUser(Username: string, Email: string, Password: string) {
     const postData: User = { Username: Username, Email: Email, Password: Password }
@@ -39,12 +40,14 @@ export class AuthService {
         })
       ).subscribe(posts => {
         this.usersArray = posts;
-        const index = this.usersArray.findIndex(user => ((user.Username === Username || user.Email === Username)
+        const user = this.usersArray.find(user => ((user.Username === Username || user.Email === Username)
           && user.Password === Password))
 
-        if (index !== -1) {
+        if (user) {
           this.userLoggedIn.next(true)
-          alert("You are now Signed In!")                 
+          localStorage.setItem('user', JSON.stringify(user));
+          alert("You are now Signed In!") 
+          this.router.navigate(['car-list'])         
         } else {
           alert("Wrong Password or Login Credentials")
         }
