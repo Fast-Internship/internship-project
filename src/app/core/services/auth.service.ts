@@ -38,7 +38,6 @@ export class AuthService {
           return postsArray;
         })
       ).subscribe(posts => {
-        console.log(posts)
         this.usersArray = posts;
         const index = this.usersArray.findIndex(user => ((user.Username === Username || user.Email === Username)
           && user.Password === Password))
