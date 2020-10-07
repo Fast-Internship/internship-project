@@ -1,0 +1,16 @@
+<nav aria-label="Page navigation example">
+    <ul class="pagination">
+        <li class="page-item">
+            <a class="page-link">Previous</a>
+        </li>
+        <li *ngFor="let button of pagination_buttons" 
+            class="page-item">
+            <a class="page-link"
+            [ngClass]="{'active': current_page == button}"
+            (click)="changePage($event)">{{ button }}</a>
+        </li>
+        <li class="page-item">
+            <a class="page-link">Next</a>
+        </li>
+    </ul>
+</nav>

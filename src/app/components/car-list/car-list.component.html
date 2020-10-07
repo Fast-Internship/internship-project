@@ -18,18 +18,6 @@
             </tbody>
         </ng-container>
     </table>
-    <nav aria-label="Page navigation example">
-        <ul class="pagination">
-            <li class="page-item">
-                <a class="page-link">Previous</a>
-            </li>
-            <!-- <li *ngFor="let button of pagination_buttons" class="page-item" [ngClass]="{'active': current_page === button-1}">
-                <a class="page-link active"                     
-                   (click)="changePage($event)">{{ button }}</a>
-            </li> -->
-            <li class="page-item">
-                <a class="page-link">Next</a>
-            </li>
-        </ul>
-    </nav>
+    <app-pagination *ngIf="pages && pages !==1"
+        [pages]="pages"></app-pagination>
 </div>

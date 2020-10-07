@@ -8,35 +8,25 @@ import { Car } from '../models/car.model';
 })
 export class CarService {
   rows: number = 10;
-  current_page: number = 1;
-  // pages: number;
-  // pagination_buttons: number[] = [];
+  current_page_index: number = 0;
+  pages: number;
+  carsArray: Car[];
 
   constructor(private http: HttpClient) {
   }
 
 
   sliceCars(carsArray) {
-    this.current_page--;
-    const start = this.rows * this.current_page;
-    const end = start + this.rows;
-    return carsArray.slice(start, end);
+    if (carsArray) {
+      const start = this.rows * this.current_page_index;
+      const end = start + this.rows;
+      return carsArray.slice(start, end);
+    }
   }
-
-  // createPagination() {
-  //   for (let i = 1; i <= this.pages; i++) {
-  //     this.pagination_buttons.push(i);
-  //   }
-  // }
-
-  // changePage(e) {
-  //   this.current_page = +e.target.innerHTML;
-  //   this.sliceCars();
-  // }
 
   fetchCars() {
     return this.http
-      .get<{ [key: string]: Car }>('https://carlist-ffae2.firebaseio.com/cars.json')
+      .get<any>('https://carlist-ffae2.firebaseio.com/cars.json')
       .pipe(map(
         responseData => {
           const postsArray: Car[] = [];
@@ -49,5 +39,4 @@ export class CarService {
         })
       )
   }
-
 }
