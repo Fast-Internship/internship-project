@@ -4,7 +4,7 @@ import { map } from 'rxjs/operators';
 import { Car } from '../models/car.model';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class CarService {
   rows: number = 10;
@@ -12,9 +12,7 @@ export class CarService {
   pages: number;
   carsArray: Car[];
 
-  constructor(private http: HttpClient) {
-  }
-
+  constructor(private http: HttpClient) {}
 
   sliceCars(carsArray) {
     if (carsArray) {
@@ -27,16 +25,16 @@ export class CarService {
   fetchCars() {
     return this.http
       .get<any>('https://carlist-ffae2.firebaseio.com/cars.json')
-      .pipe(map(
-        responseData => {
+      .pipe(
+        map((responseData) => {
           const postsArray: Car[] = [];
           for (let key in responseData) {
             if (responseData.hasOwnProperty(key)) {
-              postsArray.push({ ...responseData[key], id: key })
+              postsArray.push({ ...responseData[key], id: key });
             }
           }
           return postsArray;
         })
-      )
+      );
   }
 }
