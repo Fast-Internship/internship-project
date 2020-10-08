@@ -1,5 +1,6 @@
+import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable, Output } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { Car } from '../models/car.model';
 
@@ -12,7 +13,7 @@ export class CarService {
   pages: number;
   carsArray: Car[];
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private router: Router) {}
 
   sliceCars(carsArray) {
     if (carsArray) {
@@ -27,14 +28,27 @@ export class CarService {
       .get<any>('https://carlist-ffae2.firebaseio.com/cars.json')
       .pipe(
         map((responseData) => {
+          console.log(responseData);
           const postsArray: Car[] = [];
           for (let key in responseData) {
-            if (responseData.hasOwnProperty(key)) {
-              postsArray.push({ ...responseData[key], id: key });
+            if (responseData.hasOwnProperty(key) && responseData[key]) {
+              if (responseData[key]) {
+                postsArray.push({ ...responseData[key], id: key });
+              }
             }
           }
           return postsArray;
         })
       );
+  }
+
+  addNewCar(carData) {
+    const postsData: Car[] = carData;
+    console.log(postsData);
+    return this.http
+      .post('https://carlist-ffae2.firebaseio.com/cars.json', postsData)
+      .subscribe((res) => {
+        this.router.navigate(['car-list']);
+      });
   }
 }
