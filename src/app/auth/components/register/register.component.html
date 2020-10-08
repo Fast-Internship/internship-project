@@ -1,34 +1,157 @@
 <div class="container">
-    <h2>Create A New Account!</h2>
-    <div class="sign-form-wrapper">
-        <form autocomplete="off" [formGroup]="profileForm" (ngSubmit)="onRegister()">
-            <div class="form-row">
-                <div class="form-group col-md-12">
-                    <label for="Username">Username</label><br>
-                    <input type="text" class="form-control" id="Username" placeholder="Username" formControlName="Username"><br>
-                    <span *ngIf="!profileForm.controls.Username.valid && profileForm.controls.Username.touched"
-                        style="color:rgb(238, 83, 83)">Username must be minimum 4 characters long!</span><br>
-                </div>
-                <div class="form-group col-md-12">
-                    <label for="Email">Email</label><br>
-                    <input type="text" class="form-control" id="Email" placeholder="Email" formControlName="Email"><br>
-                    <span *ngIf="!profileForm.controls.Email.valid && profileForm.controls.Email.touched"
-                    style="color:rgb(238, 83, 83)">Invalid email format!</span><br>
-                </div>
-                <div class="form-group col-md-12">
-                    <label for="Password">Password</label><br>
-                    <input type="text" class="form-control" id="Password" placeholder="Password" formControlName="Password"><br>
-                    <span *ngIf="!profileForm.controls.Password.valid && profileForm.controls.Password.touched"
-                        style="color:rgb(238, 83, 83)">Password must be minimum 6 characters long</span><br>
-                </div>               
-            </div>
-            <div class="sign-button-wrapper">
-                <button class="btn btn-primary" type="submit">Register</button>
-                <button class="btn btn-primary" routerLink="/login">Login</button>
-            </div>
-        </form>
-
+  <div>
+    <h1 class="title">Registration</h1>
+  </div>
+  <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="inputEmail4">Email*</label>
+        <input
+          type="email"
+          class="form-control"
+          id="inputEmail4"
+          formControlName="email"
+        />
+        <!-- email validation -->
+        <div
+          *ngIf="
+            registerForm.controls.email.invalid &&
+            (registerForm.controls.email.dirty ||
+              registerForm.controls.email.touched)
+          "
+          class="alert alert-danger"
+        >
+          <div *ngIf="registerForm.controls.email.errors.required">
+            {{ ERROR_MESAGES.required }}
+          </div>
+          <div *ngIf="registerForm.controls.email.errors.email">
+            {{ ERROR_MESAGES.email_type }}
+          </div>
+        </div>
+        <!-- email validation end -->
+      </div>
+      <div class="form-group col-md-6">
+        <label for="inputPassword4">Password*</label>
+        <input
+          type="password"
+          class="form-control"
+          id="inputPassword4"
+          formControlName="password"
+        />
+        <!-- password validation -->
+        <div
+          *ngIf="
+            registerForm.controls.password.invalid &&
+            (registerForm.controls.password.dirty ||
+              registerForm.controls.password.touched)
+          "
+          class="alert alert-danger"
+        >
+          <div *ngIf="registerForm.controls.password.errors.required">
+            {{ ERROR_MESAGES.required }}
+          </div>
+          <div *ngIf="registerForm.controls.password.errors.minlength">
+            {{ ERROR_MESAGES.password_minlength }}
+          </div>
+          <div *ngIf="registerForm.controls.password.errors.whitespace">
+            {{ ERROR_MESAGES.without_whitespaces }}
+          </div>
+        </div>
+        <!-- password validation end -->
+      </div>
     </div>
-</div>
-<div class="sign-validation" #signValidation>
+    <div class="form-group">
+      <label for="inputLogin">Login*</label>
+      <input
+        type="text"
+        class="form-control"
+        id="inputLogin"
+        formControlName="login"
+      />
+      <!-- Login validation -->
+      <div
+        *ngIf="
+          registerForm.controls.login.invalid &&
+          (registerForm.controls.login.dirty ||
+            registerForm.controls.login.touched)
+        "
+        class="alert alert-danger"
+      >
+        <div *ngIf="registerForm.controls.login.errors.required">
+          {{ ERROR_MESAGES.required }}
+        </div>
+        <div *ngIf="registerForm.controls.login.errors.minlength">
+          {{ ERROR_MESAGES.login_minlength }}
+        </div>
+        <div *ngIf="registerForm.controls.login.errors.whitespace">
+          {{ ERROR_MESAGES.without_whitespaces }}
+        </div>
+      </div>
+      <!-- Login validation end -->
+    </div>
+    <div class="form-group">
+      <label for="inputName">Name*</label>
+      <input
+        type="text"
+        class="form-control"
+        id="inputName"
+        formControlName="name"
+      />
+      <!-- Name validation -->
+      <div
+        *ngIf="
+          registerForm.controls.name.invalid &&
+          (registerForm.controls.name.dirty ||
+            registerForm.controls.name.touched)
+        "
+        class="alert alert-danger"
+      >
+        <div *ngIf="registerForm.controls.name.errors.required">
+          {{ ERROR_MESAGES.required }}
+        </div>
+        <div *ngIf="registerForm.controls.name.errors.whitespace">
+          {{ ERROR_MESAGES.without_whitespaces }}
+        </div>
+      </div>
+      <!-- Name validation end -->
+    </div>
+    <div class="form-group">
+      <label for="inputSurname">Surname</label>
+      <input type="text" class="form-control" id="inputSurname" />
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="inputCity">City</label>
+        <input
+          type="text"
+          class="form-control"
+          id="inputCity"
+          formControlName="city"
+        />
+      </div>
+      <div class="form-group col-md-6">
+        <label for="inputCountry">Country</label>
+        <select
+          id="inputCountry"
+          class="form-control"
+          formControlName="country"
+        >
+          <option value="armenia">Armenia</option>
+          <option value="russia">Russia</option>
+        </select>
+      </div>
+    </div>
+    <div class="sign-button-wrapper">
+      <button
+        type="submit"
+        class="btn btn-primary pointer"
+        [disabled]="registerForm.status === 'INVALID'"
+      >
+        Register
+      </button>
+      <button class="btn btn-success" routerLink="/login">
+        Go to Login Page
+      </button>
+    </div>
+  </form>
 </div>

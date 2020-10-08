@@ -1,9 +1,15 @@
-import { ViewChild } from '@angular/core';
-import { ElementRef } from '@angular/core';
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-import { AuthService } from 'src/app/core/services/auth.service';
+import { Component, OnChanges, OnInit } from '@angular/core';
+import { Constants } from '../../../constants/constants';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  MinLengthValidator,
+  Validators,
+} from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+
+import { AuthService } from '../../../core/services/auth.service';
 
 @Component({
   selector: 'app-register',
@@ -11,29 +17,51 @@ import { AuthService } from 'src/app/core/services/auth.service';
   styleUrls: ['./register.component.css'],
 })
 export class RegisterComponent implements OnInit {
-  @ViewChild('signValidation') signValidation: ElementRef;
-  // userData: object[] = localStorage.getItem("users") ? JSON.parse(localStorage.getItem("users")) : [];
-  profileForm = this.fb.group({
-    Username: ['', [Validators.minLength(4), Validators.required]],
-    Email: ['', [Validators.pattern(/^[^\s@]+@[^\s@]+\.[^\s@]+$/), Validators.required]],
-    Password: ['', [Validators.minLength(6), Validators.required]],
-  })
+  registerForm: FormGroup;
+  ERROR_MESAGES = Constants.ERROR_MESAGES;
 
-  constructor(private fb: FormBuilder, private router: Router, private authService: AuthService) { }
+  constructor(
+    private fb: FormBuilder,
+    private router: Router,
+    private authService: AuthService
+  ) {
+    this._createForm();
+  }
+  ngOnInit() {}
 
-  ngOnInit(): void {
-
+  private _createForm() {
+    this.registerForm = this.fb.group({
+      email: new FormControl(null, [Validators.required, Validators.email]),
+      password: new FormControl(null, [
+        Validators.required,
+        Validators.minLength(8),
+        noWhitespaceValidator,
+      ]),
+      login: new FormControl(null, [
+        Validators.required,
+        Validators.minLength(6),
+        noWhitespaceValidator,
+      ]),
+      name: new FormControl(null, [Validators.required]),
+      surname: new FormControl(null),
+      city: new FormControl(null),
+      country: new FormControl(null),
+    });
   }
 
-  onRegister() {
-    if (this.profileForm.valid) {      
-      this.authService.createAndStoreUser(
-        this.profileForm.value.Username,
-        this.profileForm.value.Email,
-        this.profileForm.value.Password
-      )
-      alert("New Account Created!")
-      this.router.navigate(['login'])
-    }
+  onSubmit() {
+    this.authService.getUsers(this.registerForm.value, 'register');
   }
+
+  goToLogin() {
+    this.router.navigate(['login']);
+  }
+
+  myValidator;
+}
+
+function noWhitespaceValidator(control: FormControl) {
+  const isWhitespace = (control.value || '').includes(' ');
+  const isValid = !isWhitespace;
+  return isValid ? null : { whitespace: true };
 }
