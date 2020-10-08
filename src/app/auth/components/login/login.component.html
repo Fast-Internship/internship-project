@@ -1,27 +1,48 @@
 <div class="container">
-    <h2>Login Here</h2>
-    <form [formGroup]="profileForm" (ngSubmit)="onLogIn()">
-        <div class="form-row">
-            <div class="form-group col-md-6">
-                <label for="inputLogin">Login</label>
-                <input type="text" 
-                       class="form-control" 
-                       placeholder="Username" 
-                       formControlName="Username" 
-                       id="inputLogin">
-            </div>
-            <div class="form-group col-md-6">
-                <label for="inputPassword">Password</label>
-                <input type="text"
-                       class="form-control"
-                       placeholder="Password" 
-                       formControlName="Password" 
-                       id="inputPassword">
-            </div>
-        </div>
-        <div class="sign-button-wrapper">
-            <button class="btn btn-primary" type="submit">Login</button>
-            <button class="btn btn-primary" routerLink="/register">Register</button>
-        </div>
-    </form>
+  <h2>Login Here</h2>
+  <form [formGroup]="profileForm" (ngSubmit)="onLogIn()">
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="inputLogin">Login</label>
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Login"
+          formControlName="login"
+          id="inputLogin"
+        />
+      </div>
+      <div class="form-group col-md-6">
+        <label for="inputPassword">Password</label>
+        <input
+          type="password"
+          class="form-control"
+          placeholder="password"
+          formControlName="password"
+          id="inputPassword"
+        />
+      </div>
+    </div>
+    <div class="sign-button-wrapper">
+      <button
+        *ngIf="!loading"
+        type="submit"
+        class="btn btn-primary pointer"
+        [disabled]="profileForm.status === 'INVALID'"
+      >
+        Log in
+      </button>
+      <button *ngIf="loading" class="btn btn-primary" type="button" disabled>
+        <span
+          class="spinner-border spinner-border-sm"
+          role="status"
+          aria-hidden="true"
+        ></span>
+        Loading...
+      </button>
+      <button class="btn btn-success" routerLink="/register">
+        Create New Account
+      </button>
+    </div>
+  </form>
 </div>

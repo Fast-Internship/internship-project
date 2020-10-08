@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 
-import { AuthService } from 'src/app/core/services/auth.service'
+import { AuthService } from 'src/app/core/services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -9,19 +9,20 @@ import { AuthService } from 'src/app/core/services/auth.service'
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
+  loading: boolean = false;
   profileForm = this.fb.group({
-    Username: ['', Validators.required],
-    Password: ['', Validators.required]
-  })
-  constructor(private fb: FormBuilder,
-    private authService: AuthService) { }
+    login: ['', Validators.required],
+    password: ['', Validators.required],
+  });
+  constructor(private fb: FormBuilder, private authService: AuthService) {}
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
+
   onLogIn() {
-    this.authService.fetchUsers(
-      this.profileForm.value.Username, 
-      this.profileForm.value.Password
-    )
+    this.loading = true;
+    this.authService.getUsers(this.profileForm.value, 'login');
+    this.authService.loading.subscribe((bool) => {
+      this.loading = bool;
+    });
   }
 }
