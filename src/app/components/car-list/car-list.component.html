@@ -1,23 +1,27 @@
 <div class="container">
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th *ngFor="let title of carTitles" scope="col">{{ title }}</th>
-            </tr>
-        </thead>
-        <ng-container *ngIf="slicedCars?.length">
-            <tbody>
-                <tr *ngFor="let car of slicedCars">
-                    <td>{{car.Brand}}</td>
-                    <td>{{car.Class}}</td>
-                    <td>{{car.Date}}</td>
-                    <td>{{car.Horsepower}}</td>
-                    <td>{{car.Model}}</td>
-                    <td>{{car.Transmission}}</td>
-                </tr>
-            </tbody>
-        </ng-container>
-    </table>
-    <app-pagination *ngIf="pages && pages !==1"
-        [pages]="pages"></app-pagination>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th *ngFor="let title of carTitles" scope="col">{{ title }}</th>
+        <th>
+          <span class="add-icon" type="button" (click)="goToAddCarPage()">
+            <i class="material-icons" style="font-size: 36px">add</i>
+          </span>
+        </th>
+      </tr>
+    </thead>
+    <ng-container *ngIf="slicedCars?.length">
+      <tbody>
+        <tr *ngFor="let car of slicedCars">
+          <td>{{ car.Brand }}</td>
+          <td>{{ car.Class }}</td>
+          <td>{{ car.Date }}</td>
+          <td>{{ car.Horsepower }}</td>
+          <td>{{ car.Model }}</td>
+          <td>{{ car.Transmission }}</td>
+        </tr>
+      </tbody>
+    </ng-container>
+  </table>
+  <app-pagination *ngIf="pages && pages !== 1" [pages]="pages"></app-pagination>
 </div>
