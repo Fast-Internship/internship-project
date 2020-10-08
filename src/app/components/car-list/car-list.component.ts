@@ -18,12 +18,18 @@ export class CarListComponent implements OnInit, DoCheck {
   }
 
   ngOnInit(): void {
-    this.carService.fetchCars()
+    if(!localStorage.getItem('carsArray'))
+    {
+      this.carService.fetchCars()
       .subscribe(carsArray => {
         this.carsArray = carsArray;
         localStorage.setItem('carsArray', JSON.stringify(this.carsArray))
         this.pages = Math.ceil(carsArray.length / this.carService.rows);
-      });         
+      }); 
+    } else {
+      this.carsArray = JSON.parse(localStorage.getItem('carsArray'))
+      this.pages = Math.ceil(this.carsArray.length / this.carService.rows)
+    }        
   }
 
   ngDoCheck() {
