@@ -35,7 +35,7 @@ export class AddCarComponent implements OnInit {
         Validators.required,
         noWhitespaceValidator,
         Validators.pattern(/^[0-9]\d*$/),
-        Validators.min(1),
+        Validators.max(2020),
       ]),
       class: new FormControl(null, [
         Validators.required,
@@ -44,6 +44,7 @@ export class AddCarComponent implements OnInit {
       horsepower: new FormControl(null, [
         Validators.required,
         noWhitespaceValidator,
+        Validators.pattern(/^[0-9]\d*$/),
       ]),
       transmission: new FormControl(null, [
         Validators.required,

@@ -71,6 +71,12 @@
         <div *ngIf="addCarForm.controls.date.errors.whitespace">
           {{ ERROR_MESAGES.without_whitespaces }}
         </div>
+        <div *ngIf="addCarForm.controls.date.errors.pattern">
+          {{ ERROR_MESAGES.date_pattern_error }}
+        </div>
+        <div *ngIf="addCarForm.controls.date.errors.max">
+          {{ ERROR_MESAGES.max_number_error }}
+        </div>
       </div>
     </div>
     <!-- Class -->
@@ -119,6 +125,9 @@
         </div>
         <div *ngIf="addCarForm.controls.horsepower.errors.whitespace">
           {{ ERROR_MESAGES.without_whitespaces }}
+        </div>
+        <div *ngIf="addCarForm.controls.horsepower.errors.pattern">
+          {{ ERROR_MESAGES.only_number_pattern_error }}
         </div>
       </div>
     </div>
