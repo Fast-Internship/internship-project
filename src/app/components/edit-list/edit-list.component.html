@@ -1,7 +1,7 @@
 <div class="container">
-    <form [formGroup]="profileForm" (ngSumit)="onSubmit()">
+    <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
 
-        <label for="brend">Brand <input type="text" formControlName="Brand" id="brend"></label> 
+        <label>Brand <input type="text" formControlName="Brand"></label> 
         <label>Model <input type="text" formControlName="Model"></label>
         <label>Class <input type="text" formControlName="Class"></label>
         <label>Date <input type="number" formControlName="Date"></label>
@@ -9,7 +9,7 @@
         <label>Horsepower <input type="number" formControlName="Horsepower"></label>
         <div class="btn-div">
             <button type="button" routerLink="/car-list">Cancel</button>
-            <button type="submit" routerLink="/car-list">Edit</button>
+            <button type="submit" >Edit</button>
         </div>
     </form>
 </div>

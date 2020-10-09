@@ -14,7 +14,7 @@
                     <td>{{car.Horsepower}}</td>
                     <td>{{car.Model}}</td>
                     <td>{{car.Transmission}}</td>
-                    <td><a class="edit-btn" routerLink="/edit-list"> Edit </a></td>
+                    <td><a class="edit-btn" (click)="handleNavigationClick(car.id)"> Edit </a></td>
                 </tr>
             </tbody>
         </ng-container>
