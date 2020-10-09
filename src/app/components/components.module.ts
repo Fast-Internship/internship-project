@@ -3,13 +3,13 @@ import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { CarListComponent } from './car-list/car-list.component';
 import { PaginationComponent } from './pagination/pagination.component';
-
-
+import { DeleteComponent } from './delete/delete.component';
 
 @NgModule({
   declarations: [
     CarListComponent,
-    PaginationComponent
+    PaginationComponent,
+    DeleteComponent
   ],
   imports: [
     BrowserModule,

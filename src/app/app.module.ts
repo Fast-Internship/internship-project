@@ -20,7 +20,7 @@ import { ComponentsModule } from './components/components.module';
     AuthModule,
     RouterModule,  
     AppRoutingModule,
-    ComponentsModule    
+    ComponentsModule
   ],
   providers: [],
   bootstrap: [AppComponent],

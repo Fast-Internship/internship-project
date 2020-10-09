@@ -8,22 +8,28 @@ import { CarService } from 'src/app/core/services/car-service'
   styleUrls: ['./car-list.component.css']
 })
 export class CarListComponent implements OnInit, DoCheck {
-  carsArray: Car[];
-  carTitles: Array<string>=["Brand","Class","Date","Horsepower","Model","Transmission"];
+  carsArray: Car[] = [];
+  carTitles: Array<string> = ["Brand", "Class", "Date", "Horsepower", "Model", "Transmission"];
   slicedCars: Car[];
   pages: number;
 
 
-  constructor(private carService: CarService) { 
+  constructor(private carService: CarService) {
   }
 
   ngOnInit(): void {
-    this.carService.fetchCars()
-      .subscribe(carsArray => {
-        this.carsArray = carsArray;
-        localStorage.setItem('carsArray', JSON.stringify(this.carsArray))
-        this.pages = Math.ceil(carsArray.length / this.carService.rows);
-      });         
+    if (!localStorage.getItem('carsArray')) {
+      this.carService.fetchCars()
+        .subscribe(carsArray => {
+          this.carsArray = carsArray;
+          localStorage.setItem('carsArray', JSON.stringify(this.carsArray))
+          this.pages = Math.ceil(carsArray.length / this.carService.rows);
+        });
+    } else {
+      this.carsArray = JSON.parse(localStorage.getItem('carsArray'))
+      this.pages = Math.ceil(this.carsArray.length / this.carService.rows)
+    }
+    this.carsArray = JSON.parse(localStorage.getItem('carsArray'))
   }
 
   ngDoCheck() {
