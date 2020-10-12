@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from './core/services/auth.service';
+import { TranslationService } from './core/services/translation.service';
+// import { TranslateService } from './core/services/translate.service';
 
 
 @Component({
@@ -10,11 +12,30 @@ import { AuthService } from './core/services/auth.service';
 export class AppComponent implements OnInit {
   title = 'angular-work';
   userLoggedIn: boolean;
-  constructor(private authService: AuthService){}
+  carlist: string = "carlist";
+  languageDropdown: boolean = false;
+  
+
+  constructor(private authService: AuthService, private translationService:TranslationService){}
 
   ngOnInit(){
     this.authService.userLoggedIn.subscribe((bool)=>{
       this.userLoggedIn = bool;
     })
   }
+
+
+  changeLanguage(language){
+    this.translationService.changeLanguage(language)
+  }
+
+
+  showLanguages(){
+    if(this.languageDropdown === true){
+      this.languageDropdown = false;
+    } else{
+      this.languageDropdown = true;
+    }
+  }
+
 }

@@ -2,7 +2,7 @@
     <table class="table table-striped">
         <thead>
             <tr>
-                <th *ngFor="let title of carTitles" scope="col">{{ title }}</th>
+                <th *ngFor="let title of carTitles" scope="col">{{ title | translate }}</th>
             </tr>
         </thead>
         <ng-container *ngIf="slicedCars?.length">

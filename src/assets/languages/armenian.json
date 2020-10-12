@@ -1,0 +1,13 @@
+{
+    "values": {
+        "carlist": "Մեքենաների ցանկ",
+        "Brand": "Բրենդ",
+        "Class": "դաս",
+        "Date": "Տարեթիվ",
+        "Horsepower": "Ձիաուժ",
+        "Model": "Մոդել",
+        "Transmission": "Փոխանցման Տուփ",
+        "Next": "Հաջորդ",
+        "Previous": "Նախորդ"
+    }
+}

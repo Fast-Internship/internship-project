@@ -14,6 +14,9 @@ export class PaginationComponent implements OnInit {
   pagination_buttons: number[] = [];
   current_page: number = 1;
 
+  next: string = "Next";
+  previous: string = "Previous";
+
   constructor(private paginationService: PaginationService) { }
 
   ngOnInit(): void {

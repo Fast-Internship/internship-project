@@ -15,8 +15,7 @@ export class PaginationService implements OnInit {
       pagination_buttons.push(i);
     }
   }
-
-
+  
   changePage(e){
     this.carService.current_page_index = +e.target.innerHTML-1;   
     return this.carService.current_page_index+1; 

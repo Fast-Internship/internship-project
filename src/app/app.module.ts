@@ -11,7 +11,9 @@ import { CommonModule } from '@angular/common';
 import { ComponentsModule } from './components/components.module';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [
+    AppComponent
+  ],
   imports: [
     BrowserModule,
     CommonModule,
@@ -20,7 +22,7 @@ import { ComponentsModule } from './components/components.module';
     AuthModule,
     RouterModule,  
     AppRoutingModule,
-    ComponentsModule    
+    ComponentsModule,      
   ],
   providers: [],
   bootstrap: [AppComponent],

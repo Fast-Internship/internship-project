@@ -3,13 +3,15 @@ import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { CarListComponent } from './car-list/car-list.component';
 import { PaginationComponent } from './pagination/pagination.component';
+import { TranslationPipe } from '../core/pipes/translation.pipe';
 
 
 
 @NgModule({
   declarations: [
     CarListComponent,
-    PaginationComponent
+    PaginationComponent,
+    TranslationPipe
   ],
   imports: [
     BrowserModule,
@@ -17,7 +19,8 @@ import { PaginationComponent } from './pagination/pagination.component';
   ],
   exports: [
     CarListComponent,
-    PaginationComponent
+    PaginationComponent,
+    TranslationPipe
   ]
 })
 export class ComponentsModule { }

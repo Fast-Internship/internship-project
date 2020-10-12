@@ -1,7 +1,7 @@
 <nav aria-label="Page navigation example">
     <ul class="pagination">
         <li class="page-item">
-            <a class="page-link">Previous</a>
+            <a class="page-link">{{ previous | translate }}</a>
         </li>
         <li *ngFor="let button of pagination_buttons" 
             class="page-item">
@@ -10,7 +10,7 @@
             (click)="changePage($event)">{{ button }}</a>
         </li>
         <li class="page-item">
-            <a class="page-link">Next</a>
+            <a class="page-link">{{ next | translate }}</a>
         </li>
     </ul>
 </nav>

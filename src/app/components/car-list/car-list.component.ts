@@ -1,6 +1,8 @@
-import { Component, DoCheck, OnInit } from '@angular/core';
+import { Component, DoCheck, Input, OnInit } from '@angular/core';
 import { Car } from 'src/app/core/models/car.model';
 import { CarService } from 'src/app/core/services/car-service'
+import { TranslationService } from 'src/app/core/services/translation.service';
+
 
 @Component({
   selector: 'app-car-list',
@@ -14,16 +16,22 @@ export class CarListComponent implements OnInit, DoCheck {
   pages: number;
 
 
-  constructor(private carService: CarService) { 
+  constructor(private carService: CarService, private translationService: TranslationService) { 
   }
 
   ngOnInit(): void {
-    this.carService.fetchCars()
+    if(!localStorage.getItem('carsArray'))
+    {
+      this.carService.fetchCars()
       .subscribe(carsArray => {
         this.carsArray = carsArray;
         localStorage.setItem('carsArray', JSON.stringify(this.carsArray))
         this.pages = Math.ceil(carsArray.length / this.carService.rows);
-      });         
+      }); 
+    } else {
+      this.carsArray = JSON.parse(localStorage.getItem('carsArray'))
+      this.pages = Math.ceil(this.carsArray.length / this.carService.rows)
+    } 
   }
 
   ngDoCheck() {
