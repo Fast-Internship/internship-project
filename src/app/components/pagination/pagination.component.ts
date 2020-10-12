@@ -10,7 +10,7 @@ export class PaginationComponent implements OnInit {
   @Input() pages: number;
 
   pagination_buttons: number[] = [];
-  current_page: number = 1;
+  current_page: number = this.paginationService.getCurrentPage() || 1;
   next: string = 'Next';
   previous: string = 'Previous';
 

@@ -56,7 +56,6 @@ export class AddCarComponent implements OnInit {
   ngOnInit(): void {}
 
   onSubmit() {
-    console.log(this.addCarForm.value);
     const car = {
       Brand: this.addCarForm.value.brand,
       Class: this.addCarForm.value.class,

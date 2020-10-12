@@ -5,6 +5,8 @@ import { CarService } from './car-service';
   providedIn: 'root',
 })
 export class PaginationService implements OnInit {
+  currentPage: number = 1;
+
   constructor(private carService: CarService) {}
 
   ngOnInit() {}
@@ -17,6 +19,11 @@ export class PaginationService implements OnInit {
 
   changePage(e) {
     this.carService.current_page_index = +e.target.innerHTML - 1;
+    this.currentPage = this.carService.current_page_index + 1;
     return this.carService.current_page_index + 1;
+  }
+
+  getCurrentPage() {
+    return this.currentPage;
   }
 }
