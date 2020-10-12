@@ -41,6 +41,7 @@ export class AuthService {
                 type
               );
               this.userLoggedIn.next(true);
+              delete this.loginedUser.password;
               localStorage.setItem('user', JSON.stringify(this.loginedUser));
               this.router.navigate(['car-list']);
             } else {
