@@ -37,7 +37,7 @@ export class CarListComponent implements OnInit, DoCheck {
     this.slicedCars = this.carService.sliceCars(this.carsArray);
   }
 
-  handleNavigationClick(id) {
+  handleNavigationClick(id: string) {
     this.router.navigate(['edit-list', {key: id}])
   }
 }

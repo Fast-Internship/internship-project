@@ -1,5 +1,7 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient,HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 import { map } from 'rxjs/operators';
 import { Car } from '../models/car.model';
 
@@ -12,9 +14,11 @@ export class CarService {
   pages: number;
   carsArray: Car[];
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private router: Router) {
 
-  sliceCars(carsArray) {
+  }
+
+  sliceCars(carsArray: Car[]) {
     if (carsArray) {
       const start = this.rows * this.current_page_index;
       const end = start + this.rows;
@@ -38,4 +42,19 @@ export class CarService {
       );
   }
   
+
+  onSubmit(cars: Car[],profileForm: FormGroup,id: string,chosenCar: Car) {
+    const choosenCarIndex: number = cars.findIndex(x => x.id == (id));
+    cars[choosenCarIndex] = {...profileForm.value, id: chosenCar.id}; //({ ...responseData[key], id: key })
+    console.log(cars[choosenCarIndex])
+    localStorage.setItem('carsArray', JSON.stringify(cars));
+    this.router.navigate(['car-list'])
+    return this.http
+      .put<any>('https://carlist-ffae2.firebaseio.com/cars.json', cars, {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json'
+        })
+      })
+      .subscribe()
+  }
 }

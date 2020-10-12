@@ -1,6 +1,8 @@
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { CarService } from 'src/app/core/services/car-service';
 
 @Component({
   selector: 'app-edit-list',
@@ -13,7 +15,7 @@ export class EditListComponent implements OnInit {
   profileForm: FormGroup
   cars: any[]
 
-  constructor(private activateRoute: ActivatedRoute,  private router: Router) { 
+  constructor(private carService: CarService,  private router: Router, private http: HttpClient, private activateRoute: ActivatedRoute,) { 
     this.id = activateRoute.snapshot.params['key'];
   }
 
@@ -30,12 +32,8 @@ export class EditListComponent implements OnInit {
     })
   }
 
-  onSubmit(): void {
-    const choosenCarIndex: number = this.cars.findIndex(x => x.id == (this.id));
-    this.cars[choosenCarIndex] = {...this.profileForm.value, id: this.choosenCar.id}; //({ ...responseData[key], id: key })
-    console.log(this.cars[choosenCarIndex])
-    localStorage.setItem('carsArray', JSON.stringify(this.cars));
-    this.router.navigate(['car-list'])
+  onSubmit(){
+    this.carService.onSubmit(this.cars, this.profileForm, this.id, this.choosenCar);
   }
 
 }
