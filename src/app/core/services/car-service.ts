@@ -33,6 +33,7 @@ export class CarService {
           const postsArray: Car[] = [];
           for (let key in responseData) {
             if (responseData.hasOwnProperty(key) && responseData[key]) {
+              console.log(responseData[key]);
               if (responseData[key]) {
                 postsArray.push({ ...responseData[key], id: key });
               }
@@ -55,13 +56,14 @@ export class CarService {
   onSubmit(cars: Car[], profileForm: FormGroup, id: string, chosenCar: Car) {
     const chosenCarIndex: number = cars.findIndex((x) => x.id == id);
     cars[chosenCarIndex] = { ...profileForm.value, id: chosenCar.id }; //({ ...responseData[key], id: key })
-    this.router.navigate(['car-list']);
     return this.http
       .put<any>('https://carlist-ffae2.firebaseio.com/cars.json', cars, {
         headers: new HttpHeaders({
           'Content-Type': 'application/json',
         }),
       })
-      .subscribe();
+      .subscribe((res) => {
+        this.router.navigate(['car-list']);
+      });
   }
 }
