@@ -47,7 +47,6 @@ export class CarService {
     return this.http
       .post('https://carlist-ffae2.firebaseio.com/cars.json', postData)
       .subscribe((res: Car) => {
-        this.carsArray.push(postData);
         this.router.navigate(['car-list']);
       });
   }

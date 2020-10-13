@@ -1,7 +1,7 @@
 <div class="container">
   <table class="table table-striped">
     <thead>
-      <tr>
+      <tr *ngIf="slicedCars?.length">
         <th *ngFor="let title of carTitles" scope="col">
           {{ title | translate }}
         </th>
