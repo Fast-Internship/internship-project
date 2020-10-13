@@ -1,13 +1,12 @@
-import { Component, OnChanges, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Constants } from '../../../constants/constants';
 import {
   FormBuilder,
   FormControl,
   FormGroup,
-  MinLengthValidator,
   Validators,
 } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 
 import { AuthService } from '../../../core/services/auth.service';
 
@@ -56,8 +55,6 @@ export class RegisterComponent implements OnInit {
   goToLogin() {
     this.router.navigate(['login']);
   }
-
-  myValidator;
 }
 
 function noWhitespaceValidator(control: FormControl) {

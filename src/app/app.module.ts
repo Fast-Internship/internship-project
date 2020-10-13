@@ -9,6 +9,7 @@ import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
 import { CommonModule } from '@angular/common';
 import { ComponentsModule } from './components/components.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [AppComponent],
@@ -18,9 +19,10 @@ import { ComponentsModule } from './components/components.module';
     FormsModule,
     SharedModule,
     AuthModule,
-    RouterModule,  
+    RouterModule,
     AppRoutingModule,
-    ComponentsModule
+    ComponentsModule,
+    BrowserAnimationsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

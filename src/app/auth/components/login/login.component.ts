@@ -10,6 +10,7 @@ import { AuthService } from 'src/app/core/services/auth.service';
 })
 export class LoginComponent implements OnInit {
   loading: boolean = false;
+  hello: boolean = true;
   profileForm = this.fb.group({
     login: ['', Validators.required],
     password: ['', Validators.required],

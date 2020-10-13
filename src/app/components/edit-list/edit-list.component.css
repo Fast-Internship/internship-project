@@ -1,0 +1,40 @@
+.container {
+    margin-top: 100px;
+    border: 2px solid black;
+    border-radius: 7px;
+    width: 700px;
+}
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    width: 600px;
+}
+
+input {
+    margin-top: 50px;
+    width: 500px;
+    height: 40px;
+    border-radius: 5px;
+    font-size: 16px;
+    justify-content: end;
+}
+
+
+.btn-div {
+    display: flex;
+    justify-content: space-around;
+    width: 450PX;
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+
+button {
+    width: 100px;
+    height: 40px;
+    border: 2px solid  #919191;
+    background-color: #d4d2d2;
+    border-radius: 5px;
+    font-weight: 600;
+    font-size: 16px;
+}

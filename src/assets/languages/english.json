@@ -1,0 +1,13 @@
+{
+    "values": {
+        "carlist": "Cars List",
+        "Brand": "Brand",
+        "Class": "Class",
+        "Date": "Date",
+        "Horsepower": "Horsepower",
+        "Model": "Model",
+        "Transmission": "Transmission",
+        "Next": "Next",
+        "Previous": "Previous"
+    }
+}
