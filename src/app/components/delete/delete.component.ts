@@ -8,9 +8,9 @@ import { CarService } from 'src/app/core/services/car-service'
   styleUrls: ['./delete.component.css']
 })
 export class DeleteComponent implements OnInit {
-  filteredCarsArray;
+  //filteredCarsArray;
 
-  //@Input() id: any;
+  @Input() id: any;
   @Output() filteredList: EventEmitter<any> = new EventEmitter()
 
   constructor(
@@ -32,6 +32,6 @@ export class DeleteComponent implements OnInit {
     // }
     // // this.filteredList.emit(this.filteredCarsArray)
 
-    this.carService.deleteCar()
+    this.carService.deleteCar(this.id)
   }
 } 

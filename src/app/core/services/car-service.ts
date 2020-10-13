@@ -14,9 +14,9 @@ export class CarService {
   current_page_index: number = 0;
   pages: number;
   carsArray: Car[];
-  @Input() id: any;
+  // @Input() id: any;
 
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(private http: HttpClient, private router: Router) { }
 
   sliceCars(carsArray: Car[]) {
     if (carsArray) {
@@ -66,7 +66,9 @@ export class CarService {
       .subscribe();
   }
 
-  deleteCar(){
-    console.log(this.id)
+  deleteCar(id) {
+    return this.http.get<any>('https://carlist-ffae2.firebaseio.com/cars.json').subscribe(car => (car.splice(id, 1)))
+
+    //console.log( this.carsArray.splice(id, 1))
   }
 }
