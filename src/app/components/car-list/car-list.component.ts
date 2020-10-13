@@ -22,23 +22,13 @@ export class CarListComponent implements OnInit, DoCheck {
   slicedCars: Car[];
   pages: number;
 
-  constructor(
-    private carService: CarService,
-    private translationService: TranslationService,
-    private router: Router
-  ) {}
+  constructor(private carService: CarService, private router: Router) {}
 
   ngOnInit(): void {
-    if (!localStorage.getItem('carsArray')) {
-      this.carService.fetchCars().subscribe((carsArray) => {
-        this.carsArray = carsArray;
-        localStorage.setItem('carsArray', JSON.stringify(this.carsArray));
-        this.pages = Math.ceil(carsArray.length / this.carService.rows);
-      });
-    } else {
-      this.carsArray = JSON.parse(localStorage.getItem('carsArray'));
-      this.pages = Math.ceil(this.carsArray.length / this.carService.rows);
-    }
+    this.carService.fetchCars().subscribe((carsArray) => {
+      this.carsArray = carsArray;
+      this.pages = Math.ceil(carsArray.length / this.carService.rows);
+    });
   }
 
   ngDoCheck() {
