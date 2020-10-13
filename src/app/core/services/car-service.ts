@@ -43,13 +43,11 @@ export class CarService {
   }
 
   addNewCar(carData) {
-    this.carsArray = JSON.parse(localStorage.getItem('carsArray'));
     const postData: Car = carData;
     return this.http
       .post('https://carlist-ffae2.firebaseio.com/cars.json', postData)
       .subscribe((res: Car) => {
         this.carsArray.push(postData);
-        localStorage.setItem('carsArray', JSON.stringify(this.carsArray));
         this.router.navigate(['car-list']);
       });
   }

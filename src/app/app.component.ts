@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from './core/services/auth.service';
 import { TranslationService } from './core/services/translation.service';
-// import { TranslateService } from './core/services/translate.service';
 
 @Component({
   selector: 'app-root',
