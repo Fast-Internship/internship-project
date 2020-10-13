@@ -38,4 +38,8 @@ export class CarListComponent implements OnInit, DoCheck {
   goToAddCarPage() {
     this.router.navigate(['add-car']);
   }
+
+  handleNavigationClick(id: string) {
+    this.router.navigate(['edit-list', { key: id }]);
+  }
 }

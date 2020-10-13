@@ -1,5 +1,6 @@
 import { Router } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { FormGroup } from '@angular/forms';
 import { EventEmitter, Injectable, Output } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { Car } from '../models/car.model';
@@ -15,7 +16,7 @@ export class CarService {
 
   constructor(private http: HttpClient, private router: Router) {}
 
-  sliceCars(carsArray) {
+  sliceCars(carsArray: Car[]) {
     if (carsArray) {
       const start = this.rows * this.current_page_index;
       const end = start + this.rows;
@@ -49,5 +50,18 @@ export class CarService {
       .subscribe((res: Car) => {
         this.router.navigate(['car-list']);
       });
+  }
+
+  onSubmit(cars: Car[], profileForm: FormGroup, id: string, chosenCar: Car) {
+    const chosenCarIndex: number = cars.findIndex((x) => x.id == id);
+    cars[chosenCarIndex] = { ...profileForm.value, id: chosenCar.id }; //({ ...responseData[key], id: key })
+    this.router.navigate(['car-list']);
+    return this.http
+      .put<any>('https://carlist-ffae2.firebaseio.com/cars.json', cars, {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json',
+        }),
+      })
+      .subscribe();
   }
 }

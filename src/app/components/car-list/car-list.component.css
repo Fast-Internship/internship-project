@@ -12,3 +12,12 @@
   border-radius: 10%;
   cursor: pointer;
 }
+.edit-btn {
+  background-color: #5ce424;
+  padding: 0.6rem 1.5rem;
+  text-decoration: none;
+  color: black;
+  font-weight: 600;
+  border-radius: 5px;
+  cursor: pointer;
+}
