@@ -11,7 +11,7 @@ import { CarService } from 'src/app/core/services/car-service';
 })
 export class EditListComponent implements OnInit {
   id: string
-  choosenCar: any
+  chosenCar: any
   profileForm: FormGroup
   cars: any[]
 
@@ -20,20 +20,26 @@ export class EditListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.cars = JSON.parse(localStorage.getItem('carsArray'));
-    this.choosenCar = this.cars.find(x => x.id == (this.id));
-    this.profileForm = new FormGroup ({
-      Brand: new FormControl(this.choosenCar.Brand),
-      Model: new FormControl(this.choosenCar.Model),
-      Class: new FormControl(this.choosenCar.Class),
-      Date: new FormControl(this.choosenCar.Date),
-      Transmission: new FormControl(this.choosenCar.Transmission),
-      Horsepower: new FormControl(this.choosenCar.Horsepower)
+
+    this.carService.fetchCars()
+    .subscribe(cars => {
+      this.cars = cars;
+      this.chosenCar = cars.find(x => x.id == (this.id));
+      this.profileForm = new FormGroup ({
+        Brand: new FormControl(this.chosenCar.Brand),
+        Model: new FormControl(this.chosenCar.Model),
+        Class: new FormControl(this.chosenCar.Class),
+        Date: new FormControl(this.chosenCar.Date),
+        Transmission: new FormControl(this.chosenCar.Transmission),
+        Horsepower: new FormControl(this.chosenCar.Horsepower)
+      })
+
     })
+    
   }
 
   onSubmit(){
-    this.carService.onSubmit(this.cars, this.profileForm, this.id, this.choosenCar);
+    this.carService.onSubmit(this.cars, this.profileForm, this.id, this.chosenCar);
   }
 
 }

@@ -44,11 +44,9 @@ export class CarService {
   
 
   onSubmit(cars: Car[],profileForm: FormGroup,id: string,chosenCar: Car) {
-    const choosenCarIndex: number = cars.findIndex(x => x.id == (id));
-    cars[choosenCarIndex] = {...profileForm.value, id: chosenCar.id}; //({ ...responseData[key], id: key })
-    console.log(cars[choosenCarIndex])
-    localStorage.setItem('carsArray', JSON.stringify(cars));
-    this.router.navigate(['car-list'])
+    const chosenCarIndex: number = cars.findIndex(x => x.id == (id));
+    cars[chosenCarIndex] = {...profileForm.value, id: chosenCar.id}; //({ ...responseData[key], id: key })
+    this.router.navigate(['car-list']);
     return this.http
       .put<any>('https://carlist-ffae2.firebaseio.com/cars.json', cars, {
         headers: new HttpHeaders({
