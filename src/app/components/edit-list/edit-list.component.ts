@@ -12,7 +12,14 @@ import { CarService } from 'src/app/core/services/car-service';
 export class EditListComponent implements OnInit {
   id: string
   chosenCar: any
-  profileForm: FormGroup
+  carForm: FormGroup = new FormGroup ({
+    Brand: new FormControl(''),
+    Model: new FormControl(''),
+    Class: new FormControl(''),
+    Date: new FormControl(''),
+    Transmission: new FormControl(''),
+    Horsepower: new FormControl('')
+  })
   cars: any[]
 
   constructor(private carService: CarService,  private router: Router, private http: HttpClient, private activateRoute: ActivatedRoute,) { 
@@ -20,12 +27,11 @@ export class EditListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
     this.carService.fetchCars()
     .subscribe(cars => {
       this.cars = cars;
       this.chosenCar = cars.find(x => x.id == (this.id));
-      this.profileForm = new FormGroup ({
+      this.carForm = new FormGroup ({
         Brand: new FormControl(this.chosenCar.Brand),
         Model: new FormControl(this.chosenCar.Model),
         Class: new FormControl(this.chosenCar.Class),
@@ -33,13 +39,11 @@ export class EditListComponent implements OnInit {
         Transmission: new FormControl(this.chosenCar.Transmission),
         Horsepower: new FormControl(this.chosenCar.Horsepower)
       })
-
-    })
-    
+    })   
   }
 
   onSubmit(){
-    this.carService.onSubmit(this.cars, this.profileForm, this.id, this.chosenCar);
+    this.carService.editCar(this.cars, this.carForm, this.id, this.chosenCar);
   }
 
 }

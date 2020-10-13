@@ -25,4 +25,12 @@ export class PaginationComponent implements OnInit {
   changePage(e) {
     this.current_page = this.paginationService.changePage(e);
   }
+
+  nextPage(){
+    this.current_page = this.paginationService.nextPage(this.pages)+1;
+  }
+  
+  previousPage(){
+    this.current_page = this.paginationService.previousPage()+1;
+  }
 }

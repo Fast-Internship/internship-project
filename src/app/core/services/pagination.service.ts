@@ -1,13 +1,18 @@
 import { Injectable, OnInit } from '@angular/core';
-import { CarService } from './car-service';
+
 
 @Injectable({
   providedIn: 'root',
 })
 export class PaginationService implements OnInit {
-  currentPage: number = 1;
 
-  constructor(private carService: CarService) {}
+  current_page_index: number = 0;
+  currentPage: number = 1;
+  next: string = "Next";
+  previous: string = "Previous";
+
+  constructor() { }
+
 
   ngOnInit() {}
 
@@ -16,14 +21,30 @@ export class PaginationService implements OnInit {
       pagination_buttons.push(i);
     }
   }
+  
+  changePage(e){
+      this.current_page_index = +e.target.innerHTML-1;  
+      this.currentPage = this.current_page_index + 1; 
+      return this.current_page_index+1;    
+  }
 
-  changePage(e) {
-    this.carService.current_page_index = +e.target.innerHTML - 1;
-    this.currentPage = this.carService.current_page_index + 1;
-    return this.carService.current_page_index + 1;
+  nextPage(pages){
+    if(this.current_page_index === pages-1){
+      return this.current_page_index;
+    } else {
+      return ++this.current_page_index;
+    }
   }
 
   getCurrentPage() {
     return this.currentPage;
+  }
+
+  previousPage(){
+    if(this.current_page_index === 0){
+      return this.current_page_index;
+    } else {
+      return --this.current_page_index;
+    }
   }
 }

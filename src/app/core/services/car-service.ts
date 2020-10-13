@@ -4,21 +4,20 @@ import { FormGroup } from '@angular/forms';
 import { EventEmitter, Injectable, Output } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { Car } from '../models/car.model';
+import { PaginationService } from './pagination.service'
 
 @Injectable({
   providedIn: 'root',
 })
 export class CarService {
   rows: number = 10;
-  current_page_index: number = 0;
-  pages: number;
   carsArray: Car[];
 
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(private http: HttpClient, private paginationService: PaginationService, private router: Router) { }
 
   sliceCars(carsArray: Car[]) {
     if (carsArray) {
-      const start = this.rows * this.current_page_index;
+      const start = this.rows * this.paginationService.current_page_index;
       const end = start + this.rows;
       return carsArray.slice(start, end);
     }
@@ -29,15 +28,9 @@ export class CarService {
       .get<any>('https://carlist-ffae2.firebaseio.com/cars.json')
       .pipe(
         map((responseData) => {
-          console.log(responseData);
           const postsArray: Car[] = [];
           for (let key in responseData) {
-            if (responseData.hasOwnProperty(key) && responseData[key]) {
-              console.log(responseData[key]);
-              if (responseData[key]) {
-                postsArray.push({ ...responseData[key], id: key });
-              }
-            }
+            postsArray.push({ ...responseData[key], id: key });
           }
           return postsArray;
         })
@@ -53,9 +46,9 @@ export class CarService {
       });
   }
 
-  onSubmit(cars: Car[], profileForm: FormGroup, id: string, chosenCar: Car) {
+  editCar(cars: Car[], carForm: FormGroup, id: string, chosenCar: Car) {
     const chosenCarIndex: number = cars.findIndex((x) => x.id == id);
-    cars[chosenCarIndex] = { ...profileForm.value, id: chosenCar.id }; //({ ...responseData[key], id: key })
+    cars[chosenCarIndex] = { ...carForm.value, id: chosenCar.id }; //({ ...responseData[key], id: key })
     return this.http
       .put<any>('https://carlist-ffae2.firebaseio.com/cars.json', cars, {
         headers: new HttpHeaders({
