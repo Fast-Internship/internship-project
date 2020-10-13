@@ -8,7 +8,7 @@ import * as armenian from '../../../assets/languages/armenian.json'
 })
 
 export class TranslationService{
-  language: string = "arm";
+  language: string = JSON.parse(localStorage.getItem('language')) || 'eng';
 
   private dictionary = {
     eng: english.default,
@@ -29,5 +29,6 @@ export class TranslationService{
 
   changeLanguage(language){
     this.language = language;
+    localStorage.setItem("language", JSON.stringify(this.language));
   }  
 }

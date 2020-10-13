@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { AuthService } from './core/services/auth.service';
 import { TranslationService } from './core/services/translation.service';
 // import { TranslateService } from './core/services/translate.service';
@@ -14,7 +14,10 @@ export class AppComponent implements OnInit {
   userLoggedIn: boolean;
   carlist: string = "carlist";
   languageDropdown: boolean = false;
-  
+
+  @HostListener('document:click', ['$event']) onDocumentClick(event) {
+    this.languageDropdown = false;
+  }
 
   constructor(private authService: AuthService, private translationService:TranslationService){}
 
@@ -24,17 +27,16 @@ export class AppComponent implements OnInit {
     })
   }
 
-
   changeLanguage(language){
     this.translationService.changeLanguage(language)
   }
 
-
-  showLanguages(){
+  showLanguages(e){
     if(this.languageDropdown === true){
       this.languageDropdown = false;
     } else{
       this.languageDropdown = true;
+      e.stopPropagation()
     }
   }
 
