@@ -1,5 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { CarService } from 'src/app/core/services/car-service'
 
 @Component({
   selector: 'app-delete',
@@ -7,27 +8,30 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./delete.component.css']
 })
 export class DeleteComponent implements OnInit {
-  carsArray;
   filteredCarsArray;
-  deletedArray;
-  i
-  @Input() id: any;
 
-  constructor(private http: HttpClient) {
-  }
+  //@Input() id: any;
+  @Output() filteredList: EventEmitter<any> = new EventEmitter()
 
-  ngOnInit() {
+  constructor(
+    private http: HttpClient,
+    private carService: CarService,
+  ) { }
 
-  }
+  ngOnInit() { }
 
-  deleteLine() {
-    if (confirm("Are you sure you want to permanently remove this item?")) {
-      this.carsArray = JSON.parse(localStorage.getItem("carsArray"))
-      this.filteredCarsArray = this.carsArray.filter(car => car.id !== this.id)
-      localStorage.setItem('carsArray', JSON.stringify(this.filteredCarsArray))
-      this.carsArray = this.filteredCarsArray
-    } 
+  removeLine() {
+    // if (confirm("Are you sure you want to permanently remove this item?")) {
+    //   this.http.put(`https://carlist-ffae2.firebaseio.com/cars/${this.id}`,null,{headers: new HttpHeaders({
+    //     'Content-Type': 'application/json',
+    //   })
+    // })
+    //     .subscribe(() => {
+    //      //this.filteredCarsArray = this.filteredCarsArray.filter(car => car.id !== this.id)
+    //     })
+    // }
+    // // this.filteredList.emit(this.filteredCarsArray)
 
-    console.log(this.carsArray[1])
+    this.carService.deleteCar()
   }
 } 

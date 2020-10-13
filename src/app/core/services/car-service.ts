@@ -1,9 +1,10 @@
 import { Router } from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { FormGroup } from '@angular/forms';
-import { EventEmitter, Injectable, Output } from '@angular/core';
+import { EventEmitter, Injectable, Input, Output } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { Car } from '../models/car.model';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -13,6 +14,7 @@ export class CarService {
   current_page_index: number = 0;
   pages: number;
   carsArray: Car[];
+  @Input() id: any;
 
   constructor(private http: HttpClient, private router: Router) {}
 
@@ -29,7 +31,6 @@ export class CarService {
       .get<any>('https://carlist-ffae2.firebaseio.com/cars.json')
       .pipe(
         map((responseData) => {
-          console.log(responseData);
           const postsArray: Car[] = [];
           for (let key in responseData) {
             if (responseData.hasOwnProperty(key) && responseData[key]) {
@@ -63,5 +64,9 @@ export class CarService {
         }),
       })
       .subscribe();
+  }
+
+  deleteCar(){
+    console.log(this.id)
   }
 }
