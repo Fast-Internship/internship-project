@@ -10,6 +10,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { CommonModule } from '@angular/common';
 import { ComponentsModule } from './components/components.module';
 
+
+
 @NgModule({
   declarations: [AppComponent],
   imports: [
@@ -20,7 +22,8 @@ import { ComponentsModule } from './components/components.module';
     AuthModule,
     RouterModule,  
     AppRoutingModule,
-    ComponentsModule    
+    ComponentsModule,
+     
   ],
   providers: [],
   bootstrap: [AppComponent],

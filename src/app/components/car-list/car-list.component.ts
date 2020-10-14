@@ -1,6 +1,7 @@
 import { Component, DoCheck, OnInit } from '@angular/core';
 import { Car } from 'src/app/core/models/car.model';
-import { CarService } from 'src/app/core/services/car-service'
+import { CarService } from 'src/app/core/services/car-service';
+import { from } from 'rxjs';
 
 @Component({
   selector: 'app-car-list',
@@ -12,21 +13,33 @@ export class CarListComponent implements OnInit, DoCheck {
   carTitles: Array<string>=["Brand","Class","Date","Horsepower","Model","Transmission"];
   slicedCars: Car[];
   pages: number;
-
-
   constructor(private carService: CarService) { 
   }
 
   ngOnInit(): void {
-    this.carService.fetchCars()
+    
+    if(!localStorage.getItem('carsArray'))
+    {
+      this.carService.fetchCars()
       .subscribe(carsArray => {
         this.carsArray = carsArray;
         localStorage.setItem('carsArray', JSON.stringify(this.carsArray))
         this.pages = Math.ceil(carsArray.length / this.carService.rows);
-      });         
+      }); 
+    } else {
+      this.carsArray = JSON.parse(localStorage.getItem('carsArray'))
+      this.pages = Math.ceil(this.carsArray.length / this.carService.rows)
+    }
   }
 
   ngDoCheck() {
     this.slicedCars = this.carService.sliceCars(this.carsArray);
+    this.pages = Math.ceil(this.carsArray.length / this.carService.rows);
+
   }
+
+  onSearchClick(filteredCars){
+    this.carsArray = filteredCars
+  }
+  
 }

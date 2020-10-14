@@ -1,3 +1,4 @@
+<app-search (getFilteredCars)="onSearchClick($event)"></app-search>
 <div class="container">
     <table class="table table-striped">
         <thead>
@@ -7,7 +8,7 @@
         </thead>
         <ng-container *ngIf="slicedCars?.length">
             <tbody>
-                <tr *ngFor="let car of slicedCars">
+                <tr *ngFor="let car of slicedCars ">
                     <td>{{car.Brand}}</td>
                     <td>{{car.Class}}</td>
                     <td>{{car.Date}}</td>

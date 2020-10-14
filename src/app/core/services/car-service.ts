@@ -29,7 +29,7 @@ export class CarService {
         map((responseData) => {
           const postsArray: Car[] = [];
           for (let key in responseData) {
-            if (responseData.hasOwnProperty(key)) {
+            if (responseData.hasOwnProperty(key) && responseData[key]) {
               postsArray.push({ ...responseData[key], id: key });
             }
           }

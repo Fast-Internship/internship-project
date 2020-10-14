@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, OnChanges } from '@angular/core';
 import { PaginationService } from 'src/app/core/services/pagination.service';
 
 
@@ -7,7 +7,7 @@ import { PaginationService } from 'src/app/core/services/pagination.service';
   templateUrl: './pagination.component.html',
   styleUrls: ['./pagination.component.css']
 })
-export class PaginationComponent implements OnInit {
+export class PaginationComponent implements OnInit, OnChanges{
 
   @Input() pages:number;
 
@@ -17,9 +17,15 @@ export class PaginationComponent implements OnInit {
   constructor(private paginationService: PaginationService) { }
 
   ngOnInit(): void {
-    this.paginationService.createPagination(this.pagination_buttons, this.pages);
+
   }
   changePage(e){
     this.current_page = this.paginationService.changePage(e)
   }
+  
+  ngOnChanges(){
+    this.pagination_buttons = [];
+    this.paginationService.createPagination(this.pagination_buttons, this.pages);
+  }
+
 }
