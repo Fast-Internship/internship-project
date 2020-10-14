@@ -33,7 +33,6 @@ export class CarService {
           const postsArray: Car[] = [];
           for (let key in responseData) {
             if (responseData.hasOwnProperty(key) && responseData[key]) {
-              console.log(responseData[key]);
               if (responseData[key]) {
                 postsArray.push({ ...responseData[key], id: key });
               }

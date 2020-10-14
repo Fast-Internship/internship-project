@@ -4,12 +4,17 @@ import { AddCarComponent } from './components/add-car/add-car.component';
 import { CarListComponent } from './components/car-list/car-list.component';
 import { EditListComponent } from './components/edit-list/edit-list.component';
 import { PageNotFoundComponent } from './shared/components/page-not-found/page-not-found.component';
+import { AuthGuardService } from './core/services/auth-guard.service';
 
 const routes: Routes = [
   { path: 'add-car', component: AddCarComponent },
   { path: 'edit-list', component: EditListComponent },
   { path: 'not-loaded', component: PageNotFoundComponent },
-  { path: 'car-list', component: CarListComponent },
+  {
+    path: 'car-list',
+    component: CarListComponent,
+    canActivate: [AuthGuardService],
+  },
   { path: '**', redirectTo: 'not-loaded' },
 ];
 
