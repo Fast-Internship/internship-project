@@ -1,0 +1,48 @@
+<!-- <div class="form-group">
+    Brand<input type="text" [(ngModel)]="brand" (ngModelChange)="search($event)">
+    Class<input type="text" [(ngModel)]="class" >
+    Date<input type="text" [(ngModel)]="date" >
+    Horsepower<input type="text" [(ngModel)]="horsepower" >
+    Model<input type="text" [(ngModel)]="model" >
+    Trasnsmission<input type="text" [(ngModel)]="transmission" >
+     <button (click)="search()">Search</button> 
+</div> -->
+
+<form [formGroup]="searchFormGroup" (ngSubmit)="onSubmit()">
+
+    <label>
+        Brand
+        <input type="text" formControlName="Brand">
+    </label>
+
+    <label>
+        Class
+        <select name="" id="" formControlName="Class">
+            <option value="sedan">Sedan</option>
+            <option value="suv">SUV</option>
+            <option value="minivan">Minivan</option>
+            <option value="sports">Sports</option>
+            <option value="wagon">Wagon</option>
+        </select>
+    </label>
+
+    <label>
+        Date
+        <input type="text" formControlName="Date">
+    </label>
+
+    <label>
+        Horsepower
+        <input type="text" formControlName="Horsepower">
+    </label>
+
+    <label>
+        Model
+        <input type="text" formControlName="Model">
+    </label>
+    <label>
+        Trasnsmission
+        <input type="text" formControlName="Transmission">
+    </label>
+    <button type="submit">Search</button>
+</form>

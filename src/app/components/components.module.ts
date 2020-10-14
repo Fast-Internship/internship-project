@@ -8,6 +8,8 @@ import { EditListComponent } from './edit-list/edit-list.component';
 import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TranslationPipe } from '../core/pipes/translation.pipe';
+import { SearchComponent } from './search/search.component';
+
 
 @NgModule({
   declarations: [
@@ -16,6 +18,8 @@ import { TranslationPipe } from '../core/pipes/translation.pipe';
     TranslationPipe,
     AddCarComponent,
     EditListComponent,
+    SearchComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -30,6 +34,7 @@ import { TranslationPipe } from '../core/pipes/translation.pipe';
     TranslationPipe,
     AddCarComponent,
     EditListComponent,
+    SearchComponent
   ],
 })
 export class ComponentsModule {}

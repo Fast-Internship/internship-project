@@ -35,6 +35,11 @@ export class CarListComponent implements OnInit, DoCheck {
     this.slicedCars = this.carService.sliceCars(this.carsArray);
   }
 
+  onSearchClick(filteredCars){
+    this.carsArray = filteredCars
+    this.pages = Math.ceil(this.carsArray.length / this.carService.rows);
+  }
+
   goToAddCarPage() {
     this.router.navigate(['add-car']);
   }
