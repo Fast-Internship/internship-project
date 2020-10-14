@@ -14,7 +14,6 @@ export class CarService {
   current_page_index: number = 0;
   pages: number;
   carsArray: Car[];
-  // @Input() id: any;
 
   constructor(private http: HttpClient, private router: Router) { }
 
@@ -39,6 +38,7 @@ export class CarService {
               }
             }
           }
+          this.carsArray = postsArray
           return postsArray;
         })
       );
@@ -67,8 +67,19 @@ export class CarService {
   }
 
   deleteCar(id) {
-    return this.http.get<any>('https://carlist-ffae2.firebaseio.com/cars.json').subscribe(car => (car.splice(id, 1)))
+    if (confirm("Are you sure you want to permanently remove this item?")) {
+      const filteredCarsArray = this.carsArray.filter(car => car.id !== id);
+      this.addFilteredList(filteredCarsArray).subscribe();
+      this.carsArray = filteredCarsArray;
+    }
+  }
 
-    //console.log( this.carsArray.splice(id, 1))
+  addFilteredList(cars: Car[]) {
+    return this.http
+      .put<any>('https://carlist-ffae2.firebaseio.com/cars.json', cars, {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json',
+        }),
+      })
   }
 }

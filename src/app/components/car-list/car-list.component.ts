@@ -42,4 +42,9 @@ export class CarListComponent implements OnInit, DoCheck {
   handleNavigationClick(id: string) {
     this.router.navigate(['edit-list', { key: id }]);
   }
+
+  removeLine(id){
+    this.carService.deleteCar(id)
+    this.carsArray = this.carsArray.filter(car => car.id !== id)
+  }
 }

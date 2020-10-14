@@ -21,7 +21,7 @@
           <td>{{ car.Horsepower }}</td>
           <td>{{ car.Model }}</td>
           <td>{{ car.Transmission }}</td>
-          <td><app-delete [id]="car.id"></app-delete></td>
+          <td><button class="btn btn-danger" (click)="removeLine(car.id)">Delete</button></td>
           <td>
             <a class="edit-btn" (click)="handleNavigationClick(car.id)">
               Edit

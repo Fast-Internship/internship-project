@@ -8,14 +8,12 @@ import { EditListComponent } from './edit-list/edit-list.component';
 import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TranslationPipe } from '../core/pipes/translation.pipe';
-import { DeleteComponent } from './delete/delete.component';
 
 @NgModule({
   declarations: [
     CarListComponent,
     PaginationComponent,
     TranslationPipe,
-    DeleteComponent,
     AddCarComponent,
     EditListComponent,
   ],
