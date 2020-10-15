@@ -1,5 +1,5 @@
 import { Component, DoCheck, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Car } from 'src/app/core/models/car.model';
 import { CarService } from 'src/app/core/services/car-service';
 
@@ -24,7 +24,7 @@ export class CarListComponent implements OnInit, DoCheck {
   slicedCars: Car[];
   pages: number;
 
-  constructor(private carService: CarService, private router: Router ) {}
+  constructor(private carService: CarService, private router: Router, public route: ActivatedRoute ) {}
 
   ngOnInit(): void {
     this.carService.fetchCars().subscribe((carsArray) => {
@@ -43,10 +43,10 @@ export class CarListComponent implements OnInit, DoCheck {
   }
 
   goToAddCarPage() {
-    this.router.navigate(['add-car']);
+    this.router.navigate(['car-list/add-car']);
   }
 
   handleNavigationClick(id: string) {
-    this.router.navigate(['edit-list', { key: id }]);
+    this.router.navigate(['car-list/edit-list', { key: id }]);
   }
 }

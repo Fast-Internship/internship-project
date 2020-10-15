@@ -1,4 +1,5 @@
 import { Component, HostListener, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AuthService } from './core/services/auth.service';
 import { TranslationService } from './core/services/translation.service';
 
@@ -19,7 +20,8 @@ export class AppComponent implements OnInit {
 
   constructor(
     private authService: AuthService,
-    private translationService: TranslationService
+    private translationService: TranslationService,
+    private router: Router,
   ) {}
 
   ngOnInit() {
@@ -29,6 +31,12 @@ export class AppComponent implements OnInit {
     this.authService.userLoggedIn.subscribe(
       (bool) => (this.userLoggedIn = bool)
     );
+  }
+
+  onLogOut(){
+    this.userLoggedIn = false;
+    localStorage.removeItem('user');
+    this.router.navigate(['login'])
   }
 
   changeLanguage(language){

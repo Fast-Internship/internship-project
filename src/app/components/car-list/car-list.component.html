@@ -1,5 +1,5 @@
-<app-search (getFilteredCars)="onSearchClick($event)"></app-search>
-<div class="container">
+<div *ngIf="route.children.length === 0" class="container">
+  <app-search (getFilteredCars)="onSearchClick($event)"></app-search>
   <table class="table table-striped">
     <thead>
       <tr *ngIf="slicedCars?.length">
@@ -36,3 +36,5 @@
     [pages]="pages" 
     class="pagination"></app-pagination>
 </div>
+
+<router-outlet></router-outlet>
