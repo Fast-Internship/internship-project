@@ -1,7 +1,12 @@
 form{
-    margin: 20px;
+    display: flex;
     padding: 20px;
+    justify-content: center;
 }
 label{
     margin-right: 15px;
+}
+
+#option{
+    height: 100%;
 }
