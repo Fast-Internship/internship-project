@@ -1,8 +1,7 @@
-import { Component, DoCheck, Input, OnInit } from '@angular/core';
+import { Component, DoCheck, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { Car } from 'src/app/core/models/car.model';
 import { CarService } from 'src/app/core/services/car-service';
-import { TranslationService } from 'src/app/core/services/translation.service';
 
 @Component({
   selector: 'app-car-list',
@@ -10,6 +9,9 @@ import { TranslationService } from 'src/app/core/services/translation.service';
   styleUrls: ['./car-list.component.css'],
 })
 export class CarListComponent implements OnInit, DoCheck {
+  //translate variables =====
+    edit: string = "edit";
+  //===================
   carsArray: Car[];
   carTitles: Array<string> = [
     'Brand',
@@ -22,13 +24,13 @@ export class CarListComponent implements OnInit, DoCheck {
   slicedCars: Car[];
   pages: number;
 
-  constructor(private carService: CarService, private router: Router) {}
+  constructor(private carService: CarService, private router: Router ) {}
 
   ngOnInit(): void {
     this.carService.fetchCars().subscribe((carsArray) => {
       this.carsArray = carsArray;
       this.pages = Math.ceil(carsArray.length / this.carService.rows);
-    });
+    });    
   }
 
   ngDoCheck() {

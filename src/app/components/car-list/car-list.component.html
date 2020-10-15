@@ -23,13 +23,16 @@
           <td>{{ car.Model }}</td>
           <td>{{ car.Transmission }}</td>
           <td>
-            <a class="edit-btn" (click)="handleNavigationClick(car.id)">
-              Edit
+            <a class="edit-btn btn" (click)="handleNavigationClick(car.id)">
+              {{ edit | translate}}
             </a>
           </td>
         </tr>
       </tbody>
     </ng-container>
   </table>
-  <app-pagination *ngIf="pages && pages !== 1" [pages]="pages"></app-pagination>
+  <app-pagination 
+    *ngIf="pages && pages !== 1" 
+    [pages]="pages" 
+    class="pagination"></app-pagination>
 </div>

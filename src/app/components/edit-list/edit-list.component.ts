@@ -10,6 +10,18 @@ import { CarService } from 'src/app/core/services/car-service';
   styleUrls: ['./edit-list.component.css']
 })
 export class EditListComponent implements OnInit {
+
+  // translate variables ===========
+  edit: string = "edit";
+  cancel: string = "cancel";
+  Brand: string = "Brand";
+  Model: string = "Model";
+  Class: string = "Class";
+  Date: string = "Date";
+  Transmission: string = "Transmission";
+  Horsepower:string = "Horsepower";
+  //================================
+
   id: string
   chosenCar: any
   carForm: FormGroup = new FormGroup ({

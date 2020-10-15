@@ -10,21 +10,24 @@ import { CarService } from 'src/app/core/services/car-service';
   styleUrls: ['./search.component.css']
 })
 export class SearchComponent implements OnInit {
+
+  //translate ==========
+  search: string = "search"
+  brand: string = "Brand";
+  class: string = "Class";
+  model: string = "Model";
+  date: string = "Date";
+  horsepower: string = "Horsepower";
+  transmission: string = "Transmission";
+  // ===================
+
   @Output() getFilteredCars = new EventEmitter<Car[]>();
   searchFormGroup: FormGroup;
   cars: Car[] = [];
-  brand: string;
-  class: string;
-  model: string;
-  date: string;
-  horsepower: string;
-  transmission: string;
   filteredByBrand: any;
   pagination_buttons: number[] = [];
 
-
   constructor(private carService: CarService) {
-
   }
 
   ngOnInit(): void {
@@ -35,10 +38,7 @@ export class SearchComponent implements OnInit {
       Date: new FormControl('', Validators.required),
       Horsepower: new FormControl('', Validators.required),
       Transmission: new FormControl('', Validators.required),
-
-
     })
-
   }
 
   onSubmit() {

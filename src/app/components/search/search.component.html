@@ -1,13 +1,13 @@
 <form [formGroup]="searchFormGroup" (ngSubmit)="onSubmit()">
 
     <label>
-        Brand
+        {{ brand | translate}}
         <input type="text" formControlName="Brand">
     </label>
 
     <label>
-        Class
-        <select name="" id="option" formControlName="Class">
+        {{ class | translate}}
+        <select name="" id="" formControlName="Class">
             <option value="sedan">Sedan</option>
             <option value="suv">SUV</option>
             <option value="minivan">Minivan</option>
@@ -17,22 +17,22 @@
     </label>
 
     <label>
-        Date
+        {{ date | translate}}
         <input type="text" formControlName="Date">
     </label>
 
     <label>
-        Horsepower
+        {{ horsepower | translate}}
         <input type="text" formControlName="Horsepower">
     </label>
 
     <label>
-        Model
+        {{ model | translate}}
         <input type="text" formControlName="Model">
     </label>
     <label>
-        Trasnsmission
+        {{ transmission | translate}}
         <input type="text" formControlName="Transmission">
     </label>
-    <button type="submit">Search</button>
+    <button type="submit" class="btn btn-secondary">{{ search | translate}}</button>
 </form>

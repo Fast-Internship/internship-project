@@ -1,5 +1,6 @@
 {
     "values": {
+        "language":"EN",
         "carlist": "Cars List",
         "Brand": "Brand",
         "Class": "Class",
@@ -8,6 +9,9 @@
         "Model": "Model",
         "Transmission": "Transmission",
         "Next": "Next",
-        "Previous": "Previous"
+        "Previous": "Previous",
+        "edit": "Edit",
+        "cancel": "Cancel",
+        "search":"Search"
     }
 }

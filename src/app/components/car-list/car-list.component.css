@@ -21,3 +21,8 @@
   border-radius: 5px;
   cursor: pointer;
 }
+
+.pagination{
+  display: flex;
+  justify-content: center;
+}

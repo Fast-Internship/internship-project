@@ -2,13 +2,13 @@
     margin-top: 100px;
     border: 2px solid black;
     border-radius: 7px;
-    width: 700px;
+    width: 670px;
 }
 form {
     display: flex;
     flex-direction: column;
     align-items: flex-end;
-    width: 600px;
+    /* width: 600px; */
 }
 
 input {
@@ -30,7 +30,7 @@ input {
 }
 
 button {
-    width: 100px;
+    width: 150px;
     height: 40px;
     border: 2px solid  #919191;
     background-color: #d4d2d2;

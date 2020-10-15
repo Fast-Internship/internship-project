@@ -1,5 +1,6 @@
 {
     "values": {
+        "language":"RU",
         "carlist": "Список Машин",
         "Brand": "Марка",
         "Class": "Класс",
@@ -8,6 +9,9 @@
         "Model": "Модель",
         "Transmission": "Трансмиссия",
         "Next": "Следующий",
-        "Previous": "Предыдущий"
+        "Previous": "Предыдущий",
+        "edit": "редактировать",
+        "cancel": "Отмена",
+        "search":"Поиск"
     }
 }

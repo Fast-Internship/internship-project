@@ -1,17 +1,17 @@
 <nav aria-label="Page navigation example">
     <ul class="pagination">
         <li class="page-item">
-            <a class="page-link"
+            <a class="page-link btn"
                (click)="previousPage()">{{ previous | translate }}</a>
         </li>
         <li *ngFor="let button of pagination_buttons" 
             class="page-item">
-            <a class="page-link"
+            <a class="page-link btn"
             [ngClass]="{'active': current_page == button}"
             (click)="changePage($event)">{{ button }}</a>
         </li>
         <li class="page-item">
-            <a class="page-link"
+            <a class="page-link btn"
                (click)="nextPage()">{{ next | translate }}</a>
         </li>
     </ul>
