@@ -9,9 +9,13 @@ import { TranslationService } from './core/services/translation.service';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent implements OnInit {
+  // translation variables ============
+  carlist: string = 'carlist';
+  language: string = 'language';
+  // ==================================
   title = 'angular-work';
   userLoggedIn: boolean;
-  carlist: string = 'carlist';
+
   languageDropdown: boolean = false;
 
   @HostListener('document:click', ['$event']) onDocumentClick(event) {

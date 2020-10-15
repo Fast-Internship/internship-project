@@ -25,7 +25,7 @@
         >
       </li>
       <li class="nav-item li-language-dropdown">
-        <button (click)="showLanguages($event)" class="btn btn-secondary dropdown-toggle">Language</button> |
+        <button (click)="showLanguages($event)" class="btn btn-secondary dropdown-toggle">{{ language | translate }}</button> |
         <button (click)="onLogOut()" class="btn btn-danger">Log Out</button>
         <div class="language-dropdown" *ngIf="languageDropdown">
           <button
