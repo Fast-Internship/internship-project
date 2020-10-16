@@ -1,8 +1,7 @@
-import { Component, DoCheck, Input, OnInit } from '@angular/core';
+import { Component, DoCheck, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Car } from 'src/app/core/models/car.model';
 import { CarService } from 'src/app/core/services/car-service';
-import { TranslationService } from 'src/app/core/services/translation.service';
 
 @Component({
   selector: 'app-car-list',
