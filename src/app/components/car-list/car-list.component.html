@@ -1,6 +1,6 @@
-<div *ngIf="route.children.length === 0" class="container">
+<div *ngIf="route.children.length === 0" class="container" #container>
   <app-search (getFilteredCars)="onSearchClick($event)"></app-search>
-  <table class="table table-striped">
+  <table class="table table-striped" #table>
     <thead>
       <tr *ngIf="slicedCars?.length">
         <th *ngFor="let title of carTitles" scope="col">
@@ -23,18 +23,29 @@
           <td>{{ car.Model }}</td>
           <td>{{ car.Transmission }}</td>
           <td>
+            <button
+              class="btn btn-danger"
+              id="deleteButton"
+              [disabled]="isModalOpen"
+              (click)="displayDeleteModal(car.id)"
+            >
+              Delete
+            </button>
+          </td>
+          <td>
             <a class="edit-btn btn" (click)="handleNavigationClick(car.id)">
-              {{ edit | translate}}
+              {{ edit | translate }}
             </a>
           </td>
         </tr>
       </tbody>
     </ng-container>
   </table>
-  <app-pagination 
-    *ngIf="pages && pages !== 1" 
-    [pages]="pages" 
-    class="pagination"></app-pagination>
+  <app-pagination
+    *ngIf="pages && pages !== 1"
+    [pages]="pages"
+    class="pagination"
+  ></app-pagination>
 </div>
 
 <router-outlet></router-outlet>

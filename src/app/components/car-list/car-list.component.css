@@ -22,7 +22,20 @@
   cursor: pointer;
 }
 
-.pagination{
+.pagination {
   display: flex;
   justify-content: center;
+}
+#modal {
+  width: 400px;
+  height: 100px;
+  left: 800px;
+  z-index: 2;
+  background-color: dodgerblue;
+  position: absolute;
+  top: 250px;
+}
+
+.table-light {
+  opacity: 0.5;
 }
