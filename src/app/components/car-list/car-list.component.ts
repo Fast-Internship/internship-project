@@ -1,8 +1,9 @@
-import { Component, DoCheck, Input, OnInit } from '@angular/core';
+
+import {  Renderer2 } from '@angular/core';
+import { Component, DoCheck, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { Car } from 'src/app/core/models/car.model';
 import { CarService } from 'src/app/core/services/car-service';
-import { TranslationService } from 'src/app/core/services/translation.service';
 
 @Component({
   selector: 'app-car-list',
@@ -10,6 +11,8 @@ import { TranslationService } from 'src/app/core/services/translation.service';
   styleUrls: ['./car-list.component.css'],
 })
 export class CarListComponent implements OnInit, DoCheck {
+  div;
+  isModalOpen: boolean = false;
   carsArray: Car[];
   carTitles: Array<string> = [
     'Brand',
@@ -21,8 +24,11 @@ export class CarListComponent implements OnInit, DoCheck {
   ];
   slicedCars: Car[];
   pages: number;
+  @ViewChild('container') container: ElementRef;
+  @ViewChild('table') table: ElementRef;
 
-  constructor(private carService: CarService, private router: Router) {}
+  constructor(private carService: CarService, private router: Router, private renderer: Renderer2,) {
+  }
 
   ngOnInit(): void {
     this.carService.fetchCars().subscribe((carsArray) => {
@@ -43,8 +49,34 @@ export class CarListComponent implements OnInit, DoCheck {
     this.router.navigate(['edit-list', { key: id }]);
   }
 
-  removeLine(id){
-    this.carService.deleteCar(id)
-    this.carsArray = this.carsArray.filter(car => car.id !== id)
+  displayDeleteModal(id) {
+    this.isModalOpen = true
+    this.div = this.renderer.createElement('div')
+    this.table.nativeElement.classList.add('table-light')
+    const buttonCancel = this.renderer.createElement('button')
+    const buttonDelete = this.renderer.createElement('button')
+    const text = this.renderer.createText('Are you sure you want to permanently remove this item?');
+    buttonCancel.innerHTML = "Cancel"
+    buttonDelete.innerHTML = "Delete"
+
+    this.renderer.appendChild(this.div, text);
+    this.renderer.appendChild(this.div, buttonCancel)
+    this.renderer.appendChild(this.div, buttonDelete)
+    this.container.nativeElement.appendChild(this.div)
+
+    this.renderer.listen(buttonDelete, 'click', () => {
+      this.table.nativeElement.classList.remove('table-light')
+      this.carService.deleteCar(id)
+      this.carsArray = this.carsArray.filter(car => car.id !== id)
+      this.div.remove()
+      this.isModalOpen = false
+    })
+
+    this.renderer.listen(buttonCancel, 'click', () => {
+      this.table.nativeElement.classList.remove('table-light')
+      this.div.remove()
+      this.isModalOpen = false
+    })
+    this.renderer.setAttribute(this.div, 'id', 'modal')
   }
 }

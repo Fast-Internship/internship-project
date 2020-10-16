@@ -67,11 +67,9 @@ export class CarService {
   }
 
   deleteCar(id) {
-    if (confirm("Are you sure you want to permanently remove this item?")) {
-      const filteredCarsArray = this.carsArray.filter(car => car.id !== id);
-      this.addFilteredList(filteredCarsArray).subscribe();
-      this.carsArray = filteredCarsArray;
-    }
+    const filteredCarsArray = this.carsArray.filter(car => car.id !== id);
+    this.addFilteredList(filteredCarsArray).subscribe();
+    this.carsArray = filteredCarsArray;
   }
 
   addFilteredList(cars: Car[]) {

@@ -1,5 +1,5 @@
-<div class="container">
-  <table class="table table-striped">
+<div class="container" #container>
+  <table class="table table-striped" #table>
     <thead>
       <tr *ngIf="slicedCars?.length">
         <th *ngFor="let title of carTitles" scope="col">
@@ -21,7 +21,7 @@
           <td>{{ car.Horsepower }}</td>
           <td>{{ car.Model }}</td>
           <td>{{ car.Transmission }}</td>
-          <td><button class="btn btn-danger" (click)="removeLine(car.id)">Delete</button></td>
+          <td><button class="btn btn-danger" id="deleteButton" [disabled]='isModalOpen' (click)="displayDeleteModal(car.id)">Delete</button></td>
           <td>
             <a class="edit-btn" (click)="handleNavigationClick(car.id)">
               Edit
