@@ -1,15 +1,126 @@
 <div class="container">
-    <form [formGroup]="carForm" (ngSubmit)="onSubmit()">
-
-        <label>{{ Brand | translate}} <input type="text" formControlName="Brand"></label> 
-        <label>{{ Model | translate}} <input type="text" formControlName="Model"></label>
-        <label>{{ Class | translate}} <input type="text" formControlName="Class"></label>
-        <label>{{ Date | translate}} <input type="number" formControlName="Date"></label>
-        <label>{{ Transmission | translate}} <input type="text" formControlName="Transmission"></label>
-        <label>{{ Horsepower | translate}} <input type="number" formControlName="Horsepower"></label>
-        <div class="btn-div">
-            <button type="button" routerLink="/car-list">{{ cancel | translate }}</button>
-            <button type="submit" >{{ edit | translate }}</button>
+  <form [formGroup]="carForm" (ngSubmit)="onSubmit()">
+    <label
+      >{{ Brand | translate }} <input type="text" formControlName="Brand" />
+      <div
+        *ngIf="
+          carForm.controls.Brand.invalid &&
+          (carForm.controls.Brand.dirty || carForm.controls.Brand.touched)
+        "
+        class="alert alert-danger"
+      >
+        <div *ngIf="carForm.controls.Brand.errors.required">
+          {{ ERROR_MESAGES.required }}
         </div>
-    </form>
+      </div>
+    </label>
+
+    <label
+      >{{ Model | translate }} <input type="text" formControlName="Model" />
+      <div
+        *ngIf="
+          carForm.controls.Model.invalid &&
+          (carForm.controls.Model.dirty || carForm.controls.Model.touched)
+        "
+        class="alert alert-danger"
+      >
+        <div *ngIf="carForm.controls.Model.errors.required">
+          {{ ERROR_MESAGES.required }}
+        </div>
+      </div>
+    </label>
+
+    <label
+      >{{ Class | translate }} <input type="text" formControlName="Class" />
+      <div
+        *ngIf="
+          carForm.controls.Class.invalid &&
+          (carForm.controls.Class.dirty || carForm.controls.Class.touched)
+        "
+        class="alert alert-danger"
+      >
+        <div *ngIf="carForm.controls.Class.errors.required">
+          {{ ERROR_MESAGES.required }}
+        </div>
+        <div *ngIf="carForm.controls.Class.errors.whitespace">
+          {{ ERROR_MESAGES.without_whitespaces }}
+        </div>
+      </div>
+    </label>
+
+    <label
+      >{{ Date | translate }} <input type="text" formControlName="Date" />
+      <div
+        *ngIf="
+          carForm.controls.Date.invalid &&
+          (carForm.controls.Date.dirty || carForm.controls.Date.touched)
+        "
+        class="alert alert-danger"
+      >
+        <div *ngIf="carForm.controls.Date.errors.required">
+          {{ ERROR_MESAGES.required }}
+        </div>
+        <div *ngIf="carForm.controls.Date.errors.whitespace">
+          {{ ERROR_MESAGES.without_whitespaces }}
+        </div>
+        <div *ngIf="carForm.controls.Date.errors.pattern">
+          {{ ERROR_MESAGES.date_pattern_error }}
+        </div>
+        <div *ngIf="carForm.controls.Date.errors.max">
+          {{ ERROR_MESAGES.max_number_error }}
+        </div>
+      </div>
+    </label>
+
+    <label
+      >{{ Transmission | translate }}
+      <input type="text" formControlName="Transmission" />
+      <div
+        *ngIf="
+          carForm.controls.Transmission.invalid &&
+          (carForm.controls.Transmission.dirty ||
+            carForm.controls.Transmission.touched)
+        "
+        class="alert alert-danger"
+      >
+        <div *ngIf="carForm.controls.Transmission.errors.required">
+          {{ ERROR_MESAGES.required }}
+        </div>
+        <div *ngIf="carForm.controls.Transmission.errors.whitespace">
+          {{ ERROR_MESAGES.without_whitespaces }}
+        </div>
+      </div>
+    </label>
+
+    <label
+      >{{ Horsepower | translate }}
+      <input type="text" formControlName="Horsepower" />
+      <div
+        *ngIf="
+          carForm.controls.Horsepower.invalid &&
+          (carForm.controls.Horsepower.dirty ||
+            carForm.controls.Horsepower.touched)
+        "
+        class="alert alert-danger"
+      >
+        <div *ngIf="carForm.controls.Horsepower.errors.required">
+          {{ ERROR_MESAGES.required }}
+        </div>
+        <div *ngIf="carForm.controls.Horsepower.errors.whitespace">
+          {{ ERROR_MESAGES.without_whitespaces }}
+        </div>
+        <div *ngIf="carForm.controls.Horsepower.errors.pattern">
+          {{ ERROR_MESAGES.only_number_pattern_error }}
+        </div>
+      </div>
+    </label>
+    <div class="btn-div">
+      <button type="button" routerLink="/car-list">
+        {{ cancel | translate }}
+      </button>
+      <button type="submit" [disabled]="carForm.status === 'INVALID'">
+        {{ edit | translate }}
+      </button>
+    </div>
+  </form>
 </div>
