@@ -11,11 +11,13 @@ const routes: Routes = [
   { path: 'not-loaded', component: PageNotFoundComponent },
   { path: 'car-list', 
     component: CarListComponent, 
-    canActivate: [AuthGuard],
-    children: [
-      { path: 'add-car', component: AddCarComponent },
-      { path: 'edit-list', component: EditListComponent },
-    ]},
+    canActivate: [AuthGuard]},
+    // children: [
+    //   { path: 'add-car', component: AddCarComponent },
+    //   { path: 'edit-list', component: EditListComponent },
+    // ]},
+    { path: 'add-car', component: AddCarComponent, canActivate: [AuthGuard] },
+    { path: 'edit-list', component: EditListComponent, canActivate: [AuthGuard] },
   { path: '**', redirectTo: 'not-loaded' },
 ];
 

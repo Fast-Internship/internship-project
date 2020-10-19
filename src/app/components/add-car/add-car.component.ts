@@ -5,7 +5,7 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component,OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { Constants } from '../../constants/constants';
@@ -19,8 +19,6 @@ import { Car } from 'src/app/core/models/car.model';
 })
 export class AddCarComponent implements OnInit {
 
-  @Output() onGetNewCar = new EventEmitter<Car>();
-  
   addCarForm: FormGroup;
   ERROR_MESAGES = Constants.ERROR_MESAGES;
 

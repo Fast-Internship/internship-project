@@ -1,11 +1,11 @@
 import { Router } from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { FormGroup } from '@angular/forms';
-import { EventEmitter, Injectable, Input, Output } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { Car } from '../models/car.model';
 import { PaginationService } from './pagination.service';
-import { Observable } from 'rxjs';
+
 
 @Injectable({
   providedIn: 'root',
@@ -13,6 +13,7 @@ import { Observable } from 'rxjs';
 export class CarService {
   rows: number = 10;
   carsArray: Car[];
+  
 
   constructor(
     private http: HttpClient,
@@ -33,17 +34,13 @@ export class CarService {
       .get<any>('https://carlist-ffae2.firebaseio.com/cars.json')
       .pipe(
         map((responseData) => {
-          // const postsArray: Car[] = [];
-          // for (let key in responseData) {
-          //   postsArray.push({ ...responseData[key] });
-          // }
           this.carsArray = Object.values(responseData)
           return this.carsArray;
         })
       );
   }
 
-  addNewCar(carData) {
+  addNewCar(carData: Car) {
     const postData: Car = {...carData, id: this.generateUniqueID()};
     return this.http
       .post('https://carlist-ffae2.firebaseio.com/cars.json', postData)
@@ -83,6 +80,10 @@ export class CarService {
         }),
       }
     );
+  }
+
+  returnCars(){
+    return this.carsArray;
   }
 
 
