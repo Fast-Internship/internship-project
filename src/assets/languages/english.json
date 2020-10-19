@@ -12,6 +12,8 @@
         "Previous": "Previous",
         "edit": "Edit",
         "cancel": "Cancel",
-        "search":"Search"
+        "search":"Search",
+        "delete":"Delete",
+        "delete_message":"Are you sure you want to permanently remove this item?"
     }
 }

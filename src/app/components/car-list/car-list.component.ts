@@ -9,15 +9,22 @@ import {
 import { ActivatedRoute, Router } from '@angular/router';
 import { Car } from 'src/app/core/models/car.model';
 import { CarService } from 'src/app/core/services/car-service';
+import { TranslationPipe } from 'src/app/core/pipes/translation.pipe'
 
 @Component({
   selector: 'app-car-list',
   templateUrl: './car-list.component.html',
   styleUrls: ['./car-list.component.css'],
+  providers: [
+    TranslationPipe
+  ],
 })
 export class CarListComponent implements OnInit, DoCheck {
   //translate variables =====
   edit: string = 'edit';
+  delete: string = 'delete';
+  cancel: string = 'cancel';
+  delete_message: string = 'delete_message';
   //===================
   div;
   isModalOpen: boolean = false;
@@ -36,6 +43,7 @@ export class CarListComponent implements OnInit, DoCheck {
   @ViewChild('table') table: ElementRef;
 
   constructor(
+    private translationPipe: TranslationPipe,
     private carService: CarService,
     private router: Router,
     public route: ActivatedRoute,
@@ -69,14 +77,15 @@ export class CarListComponent implements OnInit, DoCheck {
   displayDeleteModal(id) {
     this.isModalOpen = true;
     this.div = this.renderer.createElement('div');
+    this.div.classList.add('delete-modal')
     this.table.nativeElement.classList.add('table-light');
     const buttonCancel = this.renderer.createElement('button');
+    buttonCancel.classList.add('btn','btn-secondary')
     const buttonDelete = this.renderer.createElement('button');
-    const text = this.renderer.createText(
-      'Are you sure you want to permanently remove this item?'
-    );
-    buttonCancel.innerHTML = 'Cancel';
-    buttonDelete.innerHTML = 'Delete';
+    buttonDelete.classList.add('btn','btn-danger')
+    const text = this.renderer.createText(this.translationPipe.transform(this.delete_message));
+    buttonCancel.innerHTML = this.translationPipe.transform(this.cancel);
+    buttonDelete.innerHTML = this.translationPipe.transform(this.delete);
 
     this.renderer.appendChild(this.div, text);
     this.renderer.appendChild(this.div, buttonCancel);

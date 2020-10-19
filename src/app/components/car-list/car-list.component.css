@@ -30,10 +30,12 @@
   width: 400px;
   height: 100px;
   left: 800px;
+  text-align: center;
   z-index: 2;
   background-color: dodgerblue;
   position: absolute;
   top: 250px;
+  border-radius: 5px;
 }
 
 .table-light {
