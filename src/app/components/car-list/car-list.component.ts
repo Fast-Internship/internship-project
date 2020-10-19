@@ -1,15 +1,12 @@
-import { Renderer2 } from '@angular/core';
-import {
-  Component,
-  DoCheck,
-  ElementRef,
-  OnInit,
-  ViewChild,
+import { ModalComponent } from './../modal/modal.component';
+import { ComponentFactoryResolver, Renderer2 } from '@angular/core';
+import {Component, DoCheck, ElementRef, OnInit, ViewChild,
 } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Car } from 'src/app/core/models/car.model';
 import { CarService } from 'src/app/core/services/car-service';
 import { TranslationPipe } from 'src/app/core/pipes/translation.pipe'
+import { RefDirective } from '../modal/ref.directive';
 
 @Component({
   selector: 'app-car-list',
@@ -41,13 +38,15 @@ export class CarListComponent implements OnInit, DoCheck {
   pages: number;
   @ViewChild('container') container: ElementRef;
   @ViewChild('table') table: ElementRef;
+  @ViewChild(RefDirective, {static: false}) refDir: RefDirective
 
   constructor(
-    private translationPipe: TranslationPipe,
+    // private translationPipe: TranslationPipe,
+    // private renderer: Renderer2,
     private carService: CarService,
     private router: Router,
     public route: ActivatedRoute,
-    private renderer: Renderer2
+    private resolver: ComponentFactoryResolver,
   ) {}
 
   ngOnInit(): void {
@@ -74,37 +73,55 @@ export class CarListComponent implements OnInit, DoCheck {
     this.router.navigate(['edit-list', { key: id }]);
   }
 
-  displayDeleteModal(id) {
-    this.isModalOpen = true;
-    this.div = this.renderer.createElement('div');
-    this.div.classList.add('delete-modal')
-    this.table.nativeElement.classList.add('table-light');
-    const buttonCancel = this.renderer.createElement('button');
-    buttonCancel.classList.add('btn','btn-secondary')
-    const buttonDelete = this.renderer.createElement('button');
-    buttonDelete.classList.add('btn','btn-danger')
-    const text = this.renderer.createText(this.translationPipe.transform(this.delete_message));
-    buttonCancel.innerHTML = this.translationPipe.transform(this.cancel);
-    buttonDelete.innerHTML = this.translationPipe.transform(this.delete);
+  showModal(id){
+    console.log("ddddddtt")
+    const modalFactory = this.resolver.resolveComponentFactory(ModalComponent)
+    this.refDir.containerRef.clear()
 
-    this.renderer.appendChild(this.div, text);
-    this.renderer.appendChild(this.div, buttonCancel);
-    this.renderer.appendChild(this.div, buttonDelete);
-    this.container.nativeElement.appendChild(this.div);
-
-    this.renderer.listen(buttonDelete, 'click', () => {
-      this.table.nativeElement.classList.remove('table-light');
+    const component = this.refDir.containerRef.createComponent(modalFactory)
+    component.instance.title = ' Are you shure you want to delete this item?'
+    component.instance.onDelete.subscribe(()=>{
       this.carService.deleteCar(id);
-      this.carsArray = this.carsArray.filter((car) => car.id !== id);
-      this.div.remove();
-      this.isModalOpen = false;
-    });
-
-    this.renderer.listen(buttonCancel, 'click', () => {
-      this.table.nativeElement.classList.remove('table-light');
-      this.div.remove();
-      this.isModalOpen = false;
-    });
-    this.renderer.setAttribute(this.div, 'id', 'modal');
+      this.refDir.containerRef.clear();
+    })
+    component.instance.close.subscribe(()=> {
+    this.refDir.containerRef.clear()
+    })
+    
   }
+
+   // displayDeleteModal(id) {
+  //   this.isModalOpen = true;
+  //   this.div = this.renderer.createElement('div');
+  //   this.div.classList.add('delete-modal')
+  //   this.table.nativeElement.classList.add('table-light');
+  //   const buttonCancel = this.renderer.createElement('button');
+  //   buttonCancel.classList.add('btn','btn-secondary')
+  //   const buttonDelete = this.renderer.createElement('button');
+  //   buttonDelete.classList.add('btn','btn-danger')
+  //   const text = this.renderer.createText(this.translationPipe.transform(this.delete_message));
+  //   buttonCancel.innerHTML = this.translationPipe.transform(this.cancel);
+  //   buttonDelete.innerHTML = this.translationPipe.transform(this.delete);
+
+  //   this.renderer.appendChild(this.div, text);
+  //   this.renderer.appendChild(this.div, buttonCancel);
+  //   this.renderer.appendChild(this.div, buttonDelete);
+  //   this.container.nativeElement.appendChild(this.div);
+
+  //   this.renderer.listen(buttonDelete, 'click', () => {
+  //     this.table.nativeElement.classList.remove('table-light');
+  //     this.carService.deleteCar(id);
+  //     this.carsArray = this.carsArray.filter((car) => car.id !== id);
+  //     this.div.remove();
+  //     this.isModalOpen = false;
+  //   });
+
+  //   this.renderer.listen(buttonCancel, 'click', () => {
+  //     this.table.nativeElement.classList.remove('table-light');
+  //     this.div.remove();
+  //     this.isModalOpen = false;
+  //   });
+  //   this.renderer.setAttribute(this.div, 'id', 'modal');
+  // }
+
 }

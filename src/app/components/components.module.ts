@@ -9,6 +9,8 @@ import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TranslationPipe } from '../core/pipes/translation.pipe';
 import { SearchComponent } from './search/search.component';
+import { ModalComponent } from './modal/modal.component';
+import { RefDirective } from './modal/ref.directive';
 
 
 @NgModule({
@@ -19,6 +21,8 @@ import { SearchComponent } from './search/search.component';
     AddCarComponent,
     EditListComponent,
     SearchComponent,
+    ModalComponent,
+    RefDirective
 
   ],
   imports: [
@@ -28,6 +32,7 @@ import { SearchComponent } from './search/search.component';
     ReactiveFormsModule,
     FormsModule,
   ],
+  entryComponents: [ModalComponent],
   exports: [
     CarListComponent,
     PaginationComponent,
