@@ -33,28 +33,29 @@ export class CarService {
       .get<any>('https://carlist-ffae2.firebaseio.com/cars.json')
       .pipe(
         map((responseData) => {
-          const postsArray: Car[] = [];
-          for (let key in responseData) {
-            postsArray.push({ ...responseData[key], id: key });
-          }
-          this.carsArray = postsArray;
-          return postsArray;
+          // const postsArray: Car[] = [];
+          // for (let key in responseData) {
+          //   postsArray.push({ ...responseData[key] });
+          // }
+          this.carsArray = Object.values(responseData)
+          return this.carsArray;
         })
       );
   }
 
   addNewCar(carData) {
-    const postData: Car = carData;
+    const postData: Car = {...carData, id: this.generateUniqueID()};
     return this.http
       .post('https://carlist-ffae2.firebaseio.com/cars.json', postData)
       .subscribe((res: Car) => {
+        this.carsArray = [...this.carsArray, postData]
         this.router.navigate(['car-list']);
       });
   }
 
   editCar(cars: Car[], carForm: FormGroup, id: string, chosenCar: Car) {
     const chosenCarIndex: number = cars.findIndex((x) => x.id == id);
-    cars[chosenCarIndex] = { ...carForm.value, id: chosenCar.id }; //({ ...responseData[key], id: key })
+    cars[chosenCarIndex] = { ...carForm.value, id: chosenCar.id };
     return this.http
       .put<any>('https://carlist-ffae2.firebaseio.com/cars.json', cars, {
         headers: new HttpHeaders({
@@ -82,5 +83,10 @@ export class CarService {
         }),
       }
     );
+  }
+
+
+  generateUniqueID(){
+    return '_' + Math.random().toString(36).substr(2, 9);
   }
 }
