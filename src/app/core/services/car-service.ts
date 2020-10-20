@@ -21,11 +21,11 @@ export class CarService {
     private router: Router
   ) {}
 
-  sliceCars(carsArray: Car[]) {
-    if (carsArray) {
+  sliceCars() {
+    if (this.carsArray) {
       const start = this.rows * this.paginationService.current_page_index;
       const end = start + this.rows;
-      return carsArray.slice(start, end);
+      return this.carsArray.slice(start, end);
     }
   }
 
