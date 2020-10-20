@@ -1,6 +1,7 @@
 import { ModalComponent } from './../modal/modal.component';
 import { ComponentFactoryResolver, Renderer2 } from '@angular/core';
-import {Component, DoCheck, ElementRef, OnInit, ViewChild,
+import {
+  Component, DoCheck, ElementRef, OnInit, ViewChild,
 } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Car } from 'src/app/core/models/car.model';
@@ -38,7 +39,7 @@ export class CarListComponent implements OnInit, DoCheck {
   pages: number;
   @ViewChild('container') container: ElementRef;
   @ViewChild('table') table: ElementRef;
-  @ViewChild(RefDirective, {static: false}) refDir: RefDirective
+  @ViewChild(RefDirective, { static: false }) refDir: RefDirective
 
   constructor(
     // private translationPipe: TranslationPipe,
@@ -47,7 +48,7 @@ export class CarListComponent implements OnInit, DoCheck {
     private router: Router,
     public route: ActivatedRoute,
     private resolver: ComponentFactoryResolver,
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.carService.fetchCars().subscribe((carsArray) => {
@@ -57,7 +58,7 @@ export class CarListComponent implements OnInit, DoCheck {
   }
 
   ngDoCheck() {
-    this.slicedCars = this.carService.sliceCars(this.carsArray);
+    this.slicedCars = this.carService.sliceCars();
   }
 
   onSearchClick(filteredCars) {
@@ -73,24 +74,24 @@ export class CarListComponent implements OnInit, DoCheck {
     this.router.navigate(['edit-list', { key: id }]);
   }
 
-  showModal(id){
+  showModal(id) {
     console.log("ddddddtt")
     const modalFactory = this.resolver.resolveComponentFactory(ModalComponent)
     this.refDir.containerRef.clear()
 
     const component = this.refDir.containerRef.createComponent(modalFactory)
     component.instance.title = ' Are you shure you want to delete this item?'
-    component.instance.onDelete.subscribe(()=>{
+    component.instance.onDelete.subscribe(() => {
       this.carService.deleteCar(id);
       this.refDir.containerRef.clear();
     })
-    component.instance.close.subscribe(()=> {
-    this.refDir.containerRef.clear()
+    component.instance.close.subscribe(() => {
+      this.refDir.containerRef.clear()
     })
-    
+
   }
 
-   // displayDeleteModal(id) {
+  // displayDeleteModal(id) {
   //   this.isModalOpen = true;
   //   this.div = this.renderer.createElement('div');
   //   this.div.classList.add('delete-modal')
